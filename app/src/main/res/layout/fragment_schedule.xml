@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroud"
+    tools:context=".ui.pickup.ScheduleFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="31dp"
+        android:elevation="10dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/header_bg"
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:background="@drawable/header_schedule"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_header_schedule"
+        android:layout_width="231dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Clean Environrment Can Safe The World"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView3"
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="97dp"
+        android:layout_marginEnd="18dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/total_pickup_title"
+        android:layout_width="46dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="32dp"
+        android:elevation="9dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="Total Pickup"
+        android:textColor="@color/navy"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView3"
+        app:layout_constraintTop_toTopOf="@+id/point_earned_title" />
+
+    <TextView
+        android:id="@+id/point_earned_title"
+        android:layout_width="49dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="14dp"
+        android:elevation="9dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="Point Earned"
+        android:textColor="@color/navy"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/wallet_balance_title"
+        app:layout_constraintStart_toEndOf="@+id/total_pickup_title"
+        app:layout_constraintTop_toTopOf="@+id/materialCardView3" />
+
+    <TextView
+        android:id="@+id/wallet_balance_title"
+        android:layout_width="58dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="32dp"
+        android:elevation="9dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="Wallet Balance"
+        android:textColor="@color/navy"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
+        app:layout_constraintTop_toTopOf="@+id/point_earned_title" />
+
+    <TextView
+        android:id="@+id/total_pickup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:elevation="9dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="38"
+        android:textColor="@color/navy"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/total_pickup_title"
+        app:layout_constraintStart_toStartOf="@+id/total_pickup_title"
+        app:layout_constraintTop_toBottomOf="@+id/total_pickup_title" />
+
+    <TextView
+        android:id="@+id/point_earned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:elevation="9dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="380"
+
+        android:textColor="@color/navy"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/point_earned_title"
+        app:layout_constraintStart_toStartOf="@+id/point_earned_title"
+        app:layout_constraintTop_toBottomOf="@+id/point_earned_title" />
+
+    <TextView
+        android:id="@+id/wallet_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:elevation="9dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="1238"
+        android:textColor="@color/navy"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/wallet_balance_title"
+        app:layout_constraintStart_toStartOf="@+id/wallet_balance_title"
+        app:layout_constraintTop_toBottomOf="@+id/wallet_balance_title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_schedule_icon"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="Schedule Pickup"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView3"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="55dp"
+        android:src="@drawable/ic_ngangkut_runtah"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:layout_width="230dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="You haven't scheduled the pickup yet :("
+        android:textColor="@color/navy"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

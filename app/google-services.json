@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "225520263237",
+    "project_id": "gobin-alpha-313816",
+    "storage_bucket": "gobin-alpha-313816.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225520263237:android:413c7c9f4aa6bdccf9c32c",
+        "android_client_info": {
+          "package_name": "com.bingo.gobin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225520263237-1gohqoik2fpo130far8hel85hkf5fcn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeGgN3U5n3FagvH8VNJ1Zmw0I8ASewz_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225520263237-1gohqoik2fpo130far8hel85hkf5fcn1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
