@@ -70,7 +70,7 @@
 
     <TextView
         android:id="@+id/point_earned_title"
-        android:layout_width="49dp"
+        android:layout_width="51dp"
         android:layout_height="42dp"
         android:layout_marginTop="14dp"
         android:elevation="9dp"
@@ -145,8 +145,6 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
-        app:cornerRadius="10dp"
-        app:icon="@drawable/ic_schedule_icon"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:includeFontPadding="false"
@@ -154,6 +152,8 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_schedule_icon"
         app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
         app:layout_constraintStart_toStartOf="@+id/materialCardView3"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
@@ -166,23 +166,144 @@
         android:layout_marginStart="55dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="55dp"
+        tools:visibility="gone"
         android:src="@drawable/ic_ngangkut_runtah"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="230dp"
-        android:gravity="center"
         android:layout_height="wrap_content"
-        android:includeFontPadding="false"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
         android:text="You haven't scheduled the pickup yet :("
         android:textColor="@color/navy"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Upcoming Pickup"
+        android:textColor="@color/navy"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView3"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Live Tracking Pickup"
+        android:textColor="@color/navy"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView3"
+        app:layout_constraintTop_toBottomOf="@+id/rv_schedule" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_schedule"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        tools:itemCount="1"
+        tools:listitem="@layout/row_schedule" />
+
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="118dp"
+        android:layout_height="118dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/waiting"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        android:text="Waiting For Pickup"
+        android:textColor="@color/navy"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container_map"
+        android:layout_width="match_parent"
+        android:layout_height="165dp"
+        android:layout_marginHorizontal="18dp"
+        android:background="@color/browser_actions_bg_grey"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        tools:visibility="visible" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="0dp"
+        android:layout_height="34dp"
+        android:layout_marginHorizontal="9dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/container_map"
+        app:layout_constraintEnd_toEndOf="@+id/container_map"
+        app:layout_constraintStart_toStartOf="@+id/container_map">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_car" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/btn_track"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Track"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/blue_schedule"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView4"
+        app:layout_constraintEnd_toEndOf="@+id/cardView4"
+        app:layout_constraintTop_toTopOf="@+id/cardView4" />
+
+    <TextView
+        android:id="@+id/txt_arriving"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:layout_marginStart="50dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Arriving in 10 Minutes"
+        android:textColor="@color/navy"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView4"
+        app:layout_constraintEnd_toStartOf="@+id/btn_track"
+        app:layout_constraintStart_toStartOf="@+id/cardView4"
+        app:layout_constraintTop_toTopOf="@+id/cardView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
