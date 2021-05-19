@@ -1,19 +1,20 @@
 package com.bingo.gobin.data.model
 
 import android.os.Parcelable
+import java.io.Serializable
 
 
 data class Order(
-    val id: String,
-    val idInvoice : String,
-    val idDriver:String,
-    val idUser:String,
-    val idType:Type,
-    val address:String,
-    val amount:Int,
-    val price:Int,
-    val latitude:String,
-    val longitude:String,
-    val status:String,
-    val date:String
-)
+    var id: String ="",
+    var idInvoice : String ="",
+    var idDriver:String ="",
+    var idUser:String ="",
+    var idType:Type = Type(),
+    var address:String ="",
+    var amount:Int =0,
+    var price:Int =0,
+    var latitude:String ="",
+    var longitude:String ="",
+    var status:String ="",
+    var date:String =""
+): Serializable

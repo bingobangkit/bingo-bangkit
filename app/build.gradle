@@ -48,8 +48,6 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    implementation 'com.google.firebase:firebase-auth:21.0.1'
-    implementation 'com.google.firebase:firebase-firestore:23.0.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
     implementation 'androidx.camera:camera-camera2:1.1.0-alpha04'
     implementation 'androidx.camera:camera-core:1.1.0-alpha04'
@@ -57,10 +55,14 @@ dependencies {
     implementation 'androidx.camera:camera-view:1.0.0-alpha24'
     implementation 'androidx.camera:camera-extensions:1.0.0-alpha24'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.firebase:firebase-firestore:23.0.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.0'
     testImplementation 'junit:junit:4.+'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.6'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation("io.coil-kt:coil:1.1.1")
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
