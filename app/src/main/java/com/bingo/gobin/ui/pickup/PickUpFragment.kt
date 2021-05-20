@@ -34,5 +34,9 @@ class PickUpFragment : Fragment() {
 
     }
 
+    fun setOrderInfo(){
+        
+    }
+
 
 }
