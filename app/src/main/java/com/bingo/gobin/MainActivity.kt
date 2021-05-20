@@ -40,21 +40,18 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "hallo", Toast.LENGTH_SHORT).show()
                     supportFragmentManager.commit {
                         replace(R.id.main_fragment_container, CaptureFragment())
-                        addToBackStack(null)
                     }
                     true
                 }
                 R.id.btn_home_nav -> {
                     supportFragmentManager.commit {
                         replace(R.id.main_fragment_container, ContentFragment())
-                        addToBackStack(null)
                     }
                     true
                 }
                 R.id.btn_schedule_nav -> {
                     supportFragmentManager.commit {
                         replace(R.id.main_fragment_container, ScheduleFragment())
-                        addToBackStack(null)
                     }
                     true
                 }
