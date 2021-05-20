@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="@+id/materialButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/materialButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView12">
+        app:layout_constraintTop_toBottomOf="@+id/upcoming_title">
 
     </androidx.cardview.widget.CardView>
 
@@ -110,7 +110,7 @@
 
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/upcoming_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
@@ -324,7 +324,7 @@
         android:layout_height="wrap_content"
         android:elevation="14dp"
         android:src="@drawable/ic_baseline_location_on_24"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="@+id/upcoming_title"
         app:layout_constraintTop_toTopOf="@+id/btn_card_date" />
 
     <TextView
@@ -338,7 +338,7 @@
         android:text="Jl. Rancajigang no 128 RT 03 RW 10 Desa Padamulya Kec Majalaya Kab. Bandung"
         android:textColor="@color/navy"
         app:layout_constraintStart_toEndOf="@+id/imageView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/upcoming_title" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"

@@ -141,7 +141,7 @@
         app:layout_constraintTop_toBottomOf="@+id/wallet_balance_title" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/btn_schedule"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
@@ -160,7 +160,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/img_no_schedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
@@ -170,10 +170,10 @@
         android:src="@drawable/ic_ngangkut_runtah"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_schedule" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txt_no_schedule"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -183,30 +183,34 @@
         android:text="You haven't scheduled the pickup yet :("
         android:textColor="@color/navy"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="@+id/img_no_schedule"
+        app:layout_constraintStart_toStartOf="@+id/img_no_schedule"
+        app:layout_constraintTop_toBottomOf="@+id/img_no_schedule"
         tools:visibility="gone" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/upcoming_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Upcoming Pickup"
         android:textColor="@color/navy"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/materialCardView3"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_schedule" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/live_track_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Live Tracking Pickup"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:textColor="@color/navy"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/materialCardView3"
@@ -217,15 +221,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="@+id/btn_schedule"
+        app:layout_constraintStart_toStartOf="@+id/btn_schedule"
+        app:layout_constraintTop_toBottomOf="@+id/upcoming_title"
         tools:itemCount="1"
         tools:listitem="@layout/row_schedule" />
 
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/img_waiting"
         android:layout_width="118dp"
         android:layout_height="118dp"
         android:layout_marginTop="15dp"
@@ -233,10 +237,10 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/live_track_title" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/txt_waiting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -244,9 +248,9 @@
         android:text="Waiting For Pickup"
         android:textColor="@color/navy"
         android:fontFamily="@font/poppins_bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView8"
-        app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintEnd_toEndOf="@+id/img_waiting"
+        app:layout_constraintStart_toStartOf="@+id/img_waiting"
+        app:layout_constraintTop_toBottomOf="@+id/img_waiting" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_map"
@@ -257,16 +261,18 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/live_track_title"
         tools:visibility="visible" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView4"
+        android:id="@+id/card_arriving_track"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginHorizontal="9dp"
         android:layout_marginBottom="8dp"
         android:elevation="8dp"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/container_map"
         app:layout_constraintEnd_toEndOf="@+id/container_map"
@@ -286,24 +292,28 @@
         android:elevation="10dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Track"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_marginEnd="15dp"
         android:textColor="@color/blue_schedule"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView4"
-        app:layout_constraintEnd_toEndOf="@+id/cardView4"
-        app:layout_constraintTop_toTopOf="@+id/cardView4" />
+        app:layout_constraintBottom_toBottomOf="@+id/card_arriving_track"
+        app:layout_constraintEnd_toEndOf="@+id/card_arriving_track"
+        app:layout_constraintTop_toTopOf="@+id/card_arriving_track" />
 
     <TextView
         android:id="@+id/txt_arriving"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:elevation="10dp"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_marginStart="50dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Arriving in 10 Minutes"
         android:textColor="@color/navy"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView4"
+        app:layout_constraintBottom_toBottomOf="@+id/card_arriving_track"
         app:layout_constraintEnd_toStartOf="@+id/btn_track"
-        app:layout_constraintStart_toStartOf="@+id/cardView4"
-        app:layout_constraintTop_toTopOf="@+id/cardView4" />
+        app:layout_constraintStart_toStartOf="@+id/card_arriving_track"
+        app:layout_constraintTop_toTopOf="@+id/card_arriving_track" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

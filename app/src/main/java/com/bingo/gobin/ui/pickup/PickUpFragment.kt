@@ -18,14 +18,20 @@ class PickUpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return binding.root
+        return inflater.inflate(R.layout.fragment_pick_up, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        childFragmentManager.commit {
-            replace(R.id.container_map, MapsFragment())
-        }
+
+    }
+
+    fun pickDate(){
+
+    }
+
+    fun setAddress(){
+
     }
 
 
