@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -53,14 +54,19 @@ class PickUpFragment : Fragment() {
 
         binding.btnCardDate.setOnClickListener { pickDate() }
         binding.txtDate.setOnClickListener { pickDate() }
-
+        binding.btnCardAddress.setOnClickListener {
+            parentFragmentManager.commit {
+                replace(R.id.main_fragment_container, EditAddressFragment())
+                addToBackStack(null)
+            }
+        }
     }
 
     @SuppressLint("SimpleDateFormat", "ResourceAsColor")
     private fun pickDate() {
-        DatePickerDialog().accentColor = R.color.navy
-        DatePickerDialog.newInstance { _, year, monthOfYear, dayOfMonth ->
+        DatePickerDialog.newInstance { view, year, monthOfYear, dayOfMonth ->
             val cal = Calendar.getInstance()
+            view.minDate = cal
             cal.set(Calendar.YEAR,year)
             cal.set(Calendar.MONTH,monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH,dayOfMonth)

@@ -7,14 +7,14 @@
     tools:context=".ui.home.ContentFragment">
 
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/materialCardView2"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        android:src="@drawable/ic_user" />
 
     <TextView
         android:layout_marginStart="11dp"

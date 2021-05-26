@@ -19,4 +19,14 @@
         android:name="com.bingo.gobin.ui.camera.CaptureFragment"
         android:label="fragment_capture"
         tools:layout="@layout/fragment_capture" />
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.bingo.gobin.ui.auth.AuthActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.bingo.gobin.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>
