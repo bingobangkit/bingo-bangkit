@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.bingo.gobin.data.model.Order
 import com.bingo.gobin.data.model.Type
 import com.bingo.gobin.data.repository.MainRepositoryImpl
+import com.bingo.gobin.util.lazyDeferred
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
@@ -54,10 +55,10 @@ class PickupViewModel : ViewModel() {
         return data
     }
 
-    suspend fun getOrder() {
-        val fs = Firebase.firestore.collection("order").get().await()
-        val data = fs.toObjects(Order::class.java) as List<Order>
-        val x = data.toString()
+    val order by lazyDeferred {
+        repo.getOrder()
     }
+
+
 
 }

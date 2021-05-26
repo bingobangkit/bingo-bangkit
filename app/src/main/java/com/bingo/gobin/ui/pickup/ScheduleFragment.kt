@@ -1,18 +1,22 @@
 package com.bingo.gobin.ui.pickup
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bingo.gobin.R
 import com.bingo.gobin.databinding.FragmentScheduleBinding
+import kotlinx.coroutines.launch
 
 
 class ScheduleFragment : Fragment() {
-
+    private val viewModel:ScheduleViewModel by viewModels()
     private val binding : FragmentScheduleBinding by viewBinding()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +27,7 @@ class ScheduleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        cekAja()
         with(binding){
             btnSchedule.setOnClickListener {
                 parentFragmentManager.commit {
@@ -31,6 +36,15 @@ class ScheduleFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun cekAja() {
+        lifecycleScope.launch {
+            viewModel.order.await().observe(viewLifecycleOwner,{
+                Log.d("TAG", "cekAja: $it")
+            })
+        }
+
     }
 
     fun uiNoSchedule(){
