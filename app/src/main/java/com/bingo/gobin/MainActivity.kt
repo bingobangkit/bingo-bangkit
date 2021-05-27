@@ -14,7 +14,9 @@ import androidx.navigation.NavController
 import com.bingo.gobin.data.model.Order
 import com.bingo.gobin.data.repository.MainRepositoryImpl
 import com.bingo.gobin.databinding.ActivityMainBinding
+import com.bingo.gobin.ui.camera.CameraActivity
 import com.bingo.gobin.ui.camera.CaptureFragment
+import com.bingo.gobin.ui.camera.ImageDetectionActivity
 import com.bingo.gobin.ui.home.ContentFragment
 import com.bingo.gobin.ui.pickup.ScheduleFragment
 import com.bingo.gobin.vo.Resources
@@ -43,10 +45,14 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { menu ->
             when (menu.itemId) {
                 R.id.btn_camera_nav -> {
-                    Toast.makeText(this, "hallo", Toast.LENGTH_SHORT).show()
-                    supportFragmentManager.commit {
-                        replace(R.id.main_fragment_container, CaptureFragment())
-                    }
+//                    Toast.makeText(this, "hallo", Toast.LENGTH_SHORT).show()
+//                    supportFragmentManager.commit {
+//                        replace(R.id.main_fragment_container, CaptureFragment())
+//                    }
+//                    true
+
+                    val intent = Intent(this,ImageDetectionActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.btn_home_nav -> {
