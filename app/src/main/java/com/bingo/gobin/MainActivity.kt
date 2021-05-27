@@ -35,10 +35,6 @@ class MainActivity : AppCompatActivity() {
                         replace(R.id.main_fragment_container, ImageDetectionFragment())
                     }
                     true
-
-//                    val intent = Intent(this,ImageDetectionActivity::class.java)
-//                    startActivity(intent)
-//                    true
                 }
                 R.id.btn_home_nav -> {
                     supportFragmentManager.commit {

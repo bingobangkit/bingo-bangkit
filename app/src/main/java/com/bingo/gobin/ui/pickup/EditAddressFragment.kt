@@ -11,8 +11,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import com.bingo.gobin.MainActivity
@@ -26,7 +28,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Suppress("DEPRECATION")
 class EditAddressFragment : Fragment() {
-    private val viewModel : PickupViewModel by viewModels()
+    private val viewModel: ScheduleViewModel by activityViewModels()
     private val PLACE_PICKER_REQUEST = 1
     private var _binding: FragmentEditAddressBinding? = null
     private val binding get() = _binding!!
@@ -54,8 +56,13 @@ class EditAddressFragment : Fragment() {
         }
 
         binding.btnSetLocation.setOnClickListener {
-            if (!binding.txtSetAddress.text.isNullOrBlank() && !binding.txtCoordinate.text.isNullOrBlank()){
+            if (!binding.txtSetAddress.text.isNullOrBlank()) {
                 viewModel.setAddress(binding.txtSetAddress.text.toString())
+                if (!binding.txtCoordinate.text.isNullOrBlank() || binding.txtCoordinate.hint.isNullOrBlank()) {
+                    parentFragmentManager.popBackStack()
+                } else {
+                    Toast.makeText(context, "Please Pick Location :)", Toast.LENGTH_SHORT).show()
+                }
 
             }
         }
@@ -63,12 +70,17 @@ class EditAddressFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 val place = PlacePicker.getPlace(data, context)
-                Log.d("TAG", "onActivityResult: ${place.latLng.latitude},${place.latLng.longitude}")
-                "${place.latLng.latitude},${place.latLng.longitude}".also {
+                val latitude: String = place.latLng.latitude.toString()
+                val longitude: String = place.latLng.longitude.toString()
+                with(viewModel) {
+                    this.latitude.postValue(latitude)
+                    this.longitude.postValue(longitude)
+                }
+                "${latitude},${longitude}".also {
                     binding.txtCoordinate.text =
                         Editable.Factory.getInstance().newEditable(it)
                 }
@@ -79,5 +91,7 @@ class EditAddressFragment : Fragment() {
             }
 
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
+
 }

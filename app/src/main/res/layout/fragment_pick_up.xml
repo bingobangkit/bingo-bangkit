@@ -153,6 +153,7 @@
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/poppins_light"
         android:text="Edit Address"
+        android:visibility="visible"
         android:textColor="@color/blue"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/btn_card_address"
@@ -323,14 +324,18 @@
 
     <TextView
         android:id="@+id/txt_address"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="41dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp"
         android:elevation="14dp"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:fontFamily="@font/poppins_regular"
-        android:text="Jl. Rancajigang no 128 RT 03 RW 10 Desa Padamulya Kec Majalaya Kab. Bandung"
+        android:text="Please fill the address"
         android:textColor="@color/navy"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_card_address"
+        app:layout_constraintEnd_toEndOf="@+id/txt_btn_edit_address"
         app:layout_constraintStart_toEndOf="@+id/imageView11"
         app:layout_constraintTop_toBottomOf="@+id/upcoming_title" />
 
@@ -414,6 +419,7 @@
         android:elevation="14dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Total"
+        android:layout_marginTop="8dp"
         android:textColor="@color/navy"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView17"
@@ -427,6 +433,7 @@
         android:elevation="14dp"
         android:fontFamily="@font/poppins_medium"
         android:text="2000"
+        android:textStyle="bold"
         android:textColor="@color/navy"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewxx"
@@ -456,8 +463,8 @@
         android:textColor="@color/navy"
         android:textSize="12sp"
         android:visibility="gone"
-        tools:layout_editor_absoluteX="364dp"
-        tools:layout_editor_absoluteY="434dp" />
+        app:layout_constraintEnd_toEndOf="@+id/cardView3"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
 
     <TextView
         android:id="@+id/textView19"
@@ -484,15 +491,16 @@
         app:layout_constraintTop_toTopOf="@+id/txt_recycle_trash" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/txt_rp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
         android:text="Rp."
+        android:textStyle="bold"
         android:textColor="@color/navy"
         android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/txt_mixed_trash"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/txt_total"
         app:layout_constraintTop_toTopOf="@+id/txt_total"
         tools:visibility="visible" />
 
