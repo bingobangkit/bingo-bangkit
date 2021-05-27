@@ -4,57 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginBottom="10dp"
+    tools:context=".ui.camera.ImageDetectionFragment">
 
-    tools:context=".ui.camera.CameraActivity">
+    <ImageView
+        android:id="@+id/btn_back_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_camera_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center_vertical"
+        android:text="Plastic Type Detection"
+        android:textColor="@color/navy"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/image_camera"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-
-        app:layout_constraintBottom_toTopOf="@+id/btn_predict"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_image_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_camera_fragment"
         app:layout_constraintVertical_chainStyle="spread" />
 
-    <Button
-        android:id="@+id/btn_camera"
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_predict_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Take Foto"
-
-        app:layout_constraintBottom_toBottomOf="@+id/btn_predict"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_bold"
+        android:includeFontPadding="false"
+        android:text="PET"
+        android:textAlignment="center"
+        android:textColor="@color/navy"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_predict"
-        app:layout_constraintTop_toTopOf="@+id/btn_predict" />
-
-    <Button
-        android:id="@+id/btn_predict"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Predict"
-
-        app:layout_constraintBottom_toTopOf="@+id/tv_predict_result"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_camera"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_camera" />
 
     <TextView
-        android:id="@+id/tv_predict_result"
+        android:id="@+id/tv_predict_recyclable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test"
+        android:layout_marginTop="10dp"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_bold"
+        android:includeFontPadding="false"
+        android:text="Can Recyclable Widlely"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textColor="@color/navy"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/ic_recycle_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_predict_title" />
+
+    <TextView
+        android:id="@+id/tv_predict_properties"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:text="Properties : Clear Strong and Lightweight"
+        android:textAlignment="center"
+        android:textColor="@color/navy"
+        android:textSize="14sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_predict_recyclable" />
+
+    <TextView
+        android:id="@+id/tv_no_photo"
+        android:textColor="@color/navy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginTop="10dp"
+        android:text="Please Pick Photo"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_predict_title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_camera"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="Pick Photo"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_predict" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
