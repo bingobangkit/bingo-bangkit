@@ -40,11 +40,10 @@ class ScheduleFragment : Fragment() {
 
     private fun cekAja() {
         lifecycleScope.launch {
-            viewModel.order.await().observe(viewLifecycleOwner,{
+            viewModel.getUserOrder("ZS91wKaGmkdMvCTZ4Ko6B8EkUw52","waiting").observe(viewLifecycleOwner,{
                 Log.d("TAG", "cekAja: $it")
             })
         }
-
     }
 
     fun uiNoSchedule(){

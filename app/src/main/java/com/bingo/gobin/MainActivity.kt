@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.bingo.gobin
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -15,6 +18,9 @@ import com.bingo.gobin.ui.camera.CaptureFragment
 import com.bingo.gobin.ui.home.ContentFragment
 import com.bingo.gobin.ui.pickup.ScheduleFragment
 import com.bingo.gobin.vo.Resources
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.google.android.gms.location.places.ui.PlacePicker
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -59,19 +65,20 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-//        lifecycleScope.launch {
-//            viewModel.setOrder(
-//                Order(
-//                    price_mixed = 1000,
-//                    price_plastic = 1000,
-//                    id_user = "test",
-//                )
-//            )
-//
-//        }
+
 
 
 
     }
 
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == PLACE_PICKER_REQUEST){
+//            if (resultCode == RESULT_OK){
+//                val place = PlacePicker.getPlace(data,this)
+//                print(place.name)
+//            }
+//        }
+//    }
+    val PLACE_PICKER_REQUEST = 1
 }

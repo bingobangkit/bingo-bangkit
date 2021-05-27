@@ -55,9 +55,7 @@ class PickupViewModel : ViewModel() {
         return data
     }
 
-    val order by lazyDeferred {
-        repo.getOrder()
-    }
+//
 
 
 

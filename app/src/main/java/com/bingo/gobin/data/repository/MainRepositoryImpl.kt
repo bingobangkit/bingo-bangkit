@@ -24,10 +24,12 @@ class MainRepositoryImpl {
         }
     }
 
-    fun getOrder(): LiveData<out List<Order>> {
+    fun getOrder(id_user: String, status: String): LiveData<out List<Order>> {
         val list = MutableLiveData<List<Order>>()
         val order = ArrayList<Order>()
         Firebase.firestore.collection("order")
+            .whereEqualTo("id_user", id_user)
+            .whereEqualTo("status", status)
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(
                     querySnapshot: QuerySnapshot?,
@@ -41,14 +43,12 @@ class MainRepositoryImpl {
                     for (document in querySnapshot!!) {
                         order.add(
                             Order(
-                                id = document.data["id"].toString(),
                                 id_invoice = document.data["id_invoice"].toString(),
                                 id_user = document.data["id_user"].toString(),
                                 id_driver = document.data["id_driver"].toString(),
                                 address = document.data["id_address"].toString(),
                                 id_type = document.data["id_type"].toString(),
                                 amount = document.data["amount"].toString(),
-                                price = document.data["price"].toString(),
                                 latitude = document.data["latitude"].toString(),
                                 longitude = document.data["longitude"].toString()
                             )

@@ -14,7 +14,7 @@ class MainViewModel : ViewModel() {
 
     private var repo : MainRepositoryImpl = MainRepositoryImpl()
 
-    suspend fun setOrder(order: Order) = repo.setOrder(order)
+    fun setOrder(order: Order) = repo.setOrder(order)
 
 
 }
