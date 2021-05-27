@@ -10,7 +10,7 @@
         android:id="@+id/image_camera"
         android:layout_width="300dp"
         android:layout_height="300dp"
-
+        android:src="@drawable/ic_image_placeholder"
         app:layout_constraintBottom_toTopOf="@+id/btn_predict"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,7 +22,7 @@
         android:id="@+id/btn_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Take Foto"
+        android:text="Pick Foto"
 
         app:layout_constraintBottom_toBottomOf="@+id/btn_predict"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
         android:id="@+id/tv_predict_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test"
+        android:text="Hasil"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
