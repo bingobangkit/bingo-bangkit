@@ -18,8 +18,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.bingo.gobin.R
-import com.bingo.gobin.data.content.Content
 import com.bingo.gobin.data.content.DataContent
 import com.bingo.gobin.databinding.FragmentImageDetectionBinding
 import com.bingo.gobin.ml.ConvertedModel
@@ -70,10 +71,10 @@ class ImageDetectionFragment : Fragment() {
         binding.btnCamera.setOnClickListener {
             startCropActivity()
         }
-        binding.btnPredict.setOnClickListener {
-            predict(plasticLabel!!)
-
-        }
+//        binding.btnPredict.setOnClickListener {
+//            predict(plasticLabel!!)
+//
+//        }
     }
 
     private fun predict(plasticLabel: List<String>) {
@@ -97,10 +98,18 @@ class ImageDetectionFragment : Fragment() {
                 Log.d("main", "${plasticLabel[i]} = " + outputFeature0.floatArray[i].toString())
             }
             Log.d("main", "hasil yang tertinggi ke ${plasticLabel[max]}")
-            binding.tvPredictResult.text = "hasil " + plasticLabel[max]
+            val listPlasticType = DataContent.getContent()[max]
 
-            val listType : List<Content> = DataContent.getContent()
-            val content = listType.find { it.name == plasticLabel[max] }
+            binding.apply {
+                tvNoPhoto.visibility = View.GONE
+                tvPredictTitle.text = listPlasticType.name
+                tvPredictRecyclable.text = listPlasticType.type
+                tvPredictProperties.text = listPlasticType.description
+                tvPredictTitle.visibility = View.VISIBLE
+                tvPredictProperties.visibility = View.VISIBLE
+                tvPredictRecyclable.visibility = View.VISIBLE
+            }
+//            binding.tvPredictTitle.text = "hasil " + plasticLabel[max]
         }
     }
 
@@ -133,7 +142,10 @@ class ImageDetectionFragment : Fragment() {
                 val cropUri = result?.uriContent
                 bitmap =
                     MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, cropUri)
-                binding.imageCamera.setImageURI(cropUri)
+//                binding.imageCamera.setImageURI(cropUri)
+                binding.imageCamera.load(cropUri){
+                    transformations(RoundedCornersTransformation(30f))
+                }
                 predict(plasticLabel!!)
             } else {
                 Log.d("image", "error")
