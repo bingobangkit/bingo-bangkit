@@ -12,9 +12,9 @@ import kotlinx.coroutines.flow.collect
 @ExperimentalCoroutinesApi
 class MainViewModel : ViewModel() {
 
-    private var repo : MainRepositoryImpl = MainRepositoryImpl()
 
-    fun setOrder(order: Order) = repo.setOrder(order)
+
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.bingo.gobin.data.repository
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 
 
 class MainRepositoryImpl {
+
     fun setOrder(order: Order?) {
         val firestore = FirebaseFirestore.getInstance()
         val orderCollection = firestore.collection("order")
@@ -26,10 +28,6 @@ class MainRepositoryImpl {
         }
     }
 
-    fun getServerTime(){
-        ServerTimestampOperation.getInstance().toString()
-
-    }
 
     fun getOrder(id_user: String, status: String): LiveData<out List<Order>> {
         val list = MutableLiveData<List<Order>>()
@@ -53,6 +51,7 @@ class MainRepositoryImpl {
                                 id_invoice = document.data["id_invoice"].toString(),
                                 id_user = document.data["id_user"].toString(),
                                 id_driver = document.data["id_driver"].toString(),
+                                date = document.data["date"].toString(),
                                 address = document.data["id_address"].toString(),
                                 id_type = document.data["id_type"].toString(),
                                 amount = document.data["amount"].toString(),
@@ -77,6 +76,7 @@ class MainRepositoryImpl {
             })
         return list
     }
+
 
 
 }

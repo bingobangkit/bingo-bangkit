@@ -1,5 +1,10 @@
 package com.bingo.gobin
 
+import android.annotation.SuppressLint
+import java.lang.StringBuilder
+import java.text.SimpleDateFormat
+import java.util.*
+
 object DateUtil {
     private val months = mapOf(
         1 to "January",
@@ -34,6 +39,16 @@ object DateUtil {
             ""
         }
 
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun generateInvoice(type: String): String {
+        val cal = Calendar.getInstance().time
+        val date = SimpleDateFormat("yyyyMMddHHmmss").format(cal)
+        return StringBuilder(type)
+            .append('/')
+            .append(date)
+            .toString()
     }
 
 

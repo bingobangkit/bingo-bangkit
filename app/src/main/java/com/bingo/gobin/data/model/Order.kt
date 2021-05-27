@@ -7,6 +7,7 @@ import java.io.Serializable
 
 
 data class Order(
+    var id : String = "",
     var id_invoice: String? = "",
     var id_driver: String? = "",
     var id_user: String? = "",
