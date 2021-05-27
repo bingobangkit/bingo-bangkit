@@ -8,7 +8,7 @@
     tools:context=".ui.pickup.EditAddressFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
+        android:id="@+id/txt_set_address_container"
         app:boxBackgroundColor="@color/box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline6">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_set_address"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:hint="Address" />
@@ -39,17 +40,16 @@
         android:ellipsize="end"
         android:enabled="false"
         android:maxLines="1"
-        android:hint="Pick Location!"
-        app:expandedHintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
+        app:expandedHintEnabled="true"
+        app:layout_constraintEnd_toEndOf="@+id/txt_set_address_container"
+        app:layout_constraintStart_toStartOf="@+id/txt_set_address_container"
         app:layout_constraintTop_toBottomOf="@+id/textView10">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_coordinate"
-            android:maxLength="18"
+            android:hint="Pick Location First!"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:maxLines="1"
             android:ellipsize="end"
             />
@@ -61,8 +61,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Coordinate"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+        app:layout_constraintStart_toStartOf="@+id/txt_set_address_container"
+        app:layout_constraintTop_toBottomOf="@+id/txt_set_address_container" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_pick_location"
@@ -73,7 +73,7 @@
         android:text="Pick Location"
         app:icon="@drawable/ic_map"
         app:iconGravity="textStart"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
+        app:layout_constraintEnd_toEndOf="@+id/txt_set_address_container"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txt_number_longitude"
         app:layout_constraintTop_toBottomOf="@+id/txt_number_longitude" />
@@ -83,7 +83,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:text="OK"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
+        app:layout_constraintEnd_toEndOf="@+id/txt_set_address_container"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txt_number_longitude"
         app:layout_constraintTop_toBottomOf="@+id/btn_pick_location" />

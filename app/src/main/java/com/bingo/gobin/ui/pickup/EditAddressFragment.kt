@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
 import com.bingo.gobin.MainActivity
 import com.bingo.gobin.R
 import com.bingo.gobin.databinding.FragmentEditAddressBinding
@@ -25,6 +26,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Suppress("DEPRECATION")
 class EditAddressFragment : Fragment() {
+    private val viewModel : PickupViewModel by viewModels()
     private val PLACE_PICKER_REQUEST = 1
     private var _binding: FragmentEditAddressBinding? = null
     private val binding get() = _binding!!
@@ -49,7 +51,13 @@ class EditAddressFragment : Fragment() {
             } catch (e: GooglePlayServicesNotAvailableException) {
                 e.printStackTrace()
             }
+        }
 
+        binding.btnSetLocation.setOnClickListener {
+            if (!binding.txtSetAddress.text.isNullOrBlank() && !binding.txtCoordinate.text.isNullOrBlank()){
+                viewModel.setAddress(binding.txtSetAddress.text.toString())
+
+            }
         }
     }
 
@@ -66,7 +74,7 @@ class EditAddressFragment : Fragment() {
                 }
                 binding.txtNumberLongitude.hint = ""
                 if (!place.name.isNullOrBlank()) {
-                    binding.textInputLayout3.editText!!.text = place.name as Editable?
+                    binding.txtSetAddress.text = place.name as Editable?
                 }
             }
 

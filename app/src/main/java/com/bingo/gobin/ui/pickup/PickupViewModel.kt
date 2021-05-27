@@ -11,13 +11,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.net.Inet4Address
 
 class PickupViewModel : ViewModel() {
     private var repo: MainRepositoryImpl = MainRepositoryImpl()
     private val _amountPlastic = MutableLiveData<Int>().apply { value = 1 }
     private var _datePickup = MutableLiveData<String>()
+    private var _address = MutableLiveData("")
     val datePickup = _datePickup
     val amountPlastic: LiveData<Int> = _amountPlastic
+    val address: LiveData<String> = _address
 
 
     fun addPlasticAmount() {
@@ -46,6 +49,12 @@ class PickupViewModel : ViewModel() {
     fun setDatePickup(date: String) {
         _datePickup.postValue(date)
     }
+
+    fun setAddress(address: String){
+        _address.postValue(address)
+    }
+
+
 
 
 

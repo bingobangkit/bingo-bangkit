@@ -39,6 +39,7 @@ class PickUpFragment : Fragment() {
         bottomNavigationView.visibility = View.GONE
         setOrderInfo()
         getCurrentDate()
+        setAddress()
         viewModel.amountPlastic.observe(viewLifecycleOwner, {
             val data = it.toString()
             binding.txtKgRecyle.text = "${data}kg"
@@ -56,7 +57,7 @@ class PickUpFragment : Fragment() {
         binding.txtDate.setOnClickListener { pickDate() }
         binding.btnCardAddress.setOnClickListener {
             parentFragmentManager.commit {
-                replace(R.id.main_fragment_container, EditAddressFragment())
+                add(R.id.main_fragment_container, EditAddressFragment())
                 addToBackStack(null)
             }
         }
@@ -85,8 +86,10 @@ class PickUpFragment : Fragment() {
         })
     }
 
-    fun setAddress() {
-
+    private fun setAddress() {
+        viewModel.address.observe(viewLifecycleOwner,{
+            binding.txtAddress.text = it
+        })
     }
 
     private fun setOrderInfo() {

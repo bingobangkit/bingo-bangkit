@@ -16,9 +16,9 @@
     </fragment>
     <fragment
         android:id="@+id/captureFragment"
-        android:name="com.bingo.gobin.ui.camera.CaptureFragment"
+        android:name="com.bingo.gobin.ui.camera.ImageDetectionFragment"
         android:label="fragment_capture"
-        tools:layout="@layout/fragment_capture" />
+        tools:layout="@layout/fragment_image_detection" />
     <activity
         android:id="@+id/authActivity"
         android:name="com.bingo.gobin.ui.auth.AuthActivity"
