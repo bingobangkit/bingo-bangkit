@@ -1,33 +1,18 @@
 @file:Suppress("DEPRECATION")
 
 package com.bingo.gobin
-
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import com.bingo.gobin.data.model.Order
-import com.bingo.gobin.data.repository.MainRepositoryImpl
 import com.bingo.gobin.databinding.ActivityMainBinding
-import com.bingo.gobin.ui.camera.CameraActivity
-import com.bingo.gobin.ui.camera.CaptureFragment
-import com.bingo.gobin.ui.camera.ImageDetectionActivity
+import com.bingo.gobin.ui.camera.ImageDetectionFragment
 import com.bingo.gobin.ui.home.ContentFragment
 import com.bingo.gobin.ui.pickup.ScheduleFragment
-import com.bingo.gobin.vo.Resources
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
-import com.google.android.gms.common.GooglePlayServicesRepairableException
-import com.google.android.gms.location.places.ui.PlacePicker
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
-//import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.tasks.await
+
 @ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
@@ -45,15 +30,15 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { menu ->
             when (menu.itemId) {
                 R.id.btn_camera_nav -> {
-//                    Toast.makeText(this, "hallo", Toast.LENGTH_SHORT).show()
-//                    supportFragmentManager.commit {
-//                        replace(R.id.main_fragment_container, CaptureFragment())
-//                    }
-//                    true
-
-                    val intent = Intent(this,ImageDetectionActivity::class.java)
-                    startActivity(intent)
+                    Toast.makeText(this, "hallo", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.commit {
+                        replace(R.id.main_fragment_container, ImageDetectionFragment())
+                    }
                     true
+
+//                    val intent = Intent(this,ImageDetectionActivity::class.java)
+//                    startActivity(intent)
+//                    true
                 }
                 R.id.btn_home_nav -> {
                     supportFragmentManager.commit {
@@ -86,5 +71,4 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
-    val PLACE_PICKER_REQUEST = 1
 }
