@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bingo.gobin.R
+import com.bingo.gobin.data.content.Content
+import com.bingo.gobin.data.content.DataContent
 import com.bingo.gobin.databinding.FragmentImageDetectionBinding
 import com.bingo.gobin.ml.ConvertedModel
 import com.canhub.cropper.CropImage
@@ -96,6 +98,9 @@ class ImageDetectionFragment : Fragment() {
             }
             Log.d("main", "hasil yang tertinggi ke ${plasticLabel[max]}")
             binding.tvPredictResult.text = "hasil " + plasticLabel[max]
+
+            val listType : List<Content> = DataContent.getContent()
+            val content = listType.find { it.name == plasticLabel[max] }
         }
     }
 

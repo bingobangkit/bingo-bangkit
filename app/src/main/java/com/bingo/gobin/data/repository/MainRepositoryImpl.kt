@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import com.bingo.gobin.data.model.Order
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.model.ServerTimestamps
+import com.google.firebase.firestore.model.mutation.ServerTimestampOperation
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +24,11 @@ class MainRepositoryImpl {
                 orderCollection.document().set(order)
             }
         }
+    }
+
+    fun getServerTime(){
+        ServerTimestampOperation.getInstance().toString()
+
     }
 
     fun getOrder(id_user: String, status: String): LiveData<out List<Order>> {
