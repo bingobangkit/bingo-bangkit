@@ -33,6 +33,11 @@ class ImageDetectionFragment : Fragment() {
     private val binding: FragmentImageDetectionBinding by viewBinding()
     private var bitmap: Bitmap? = null
 
+    private val fileName = "label.txt"
+    private val inputString = activity?.application?.assets?.open(fileName)?.bufferedReader()
+        .use { it?.readText() }
+    private val plasticLabel = inputString?.split("\n")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,10 +49,7 @@ class ImageDetectionFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fileName = "label.txt"
-        val inputString = requireActivity().application.assets.open(fileName).bufferedReader()
-            .use { it.readText() }
-        val plasticLabel = inputString.split("\n")
+
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -64,30 +66,34 @@ class ImageDetectionFragment : Fragment() {
         binding.btnCamera.setOnClickListener {
             startCropActivity()
         }
-        binding.btnPredict.setOnClickListener {
-            if (bitmap != null) {
-                val resized: Bitmap = Bitmap.createScaledBitmap(bitmap!!, 224, 224, true)
-                val model = ConvertedModel.newInstance(requireContext())
+//        binding.btnPredict.setOnClickListener {
+//            predictObject(plasticLabel)
+//
+//        }
+    }
 
-                val inputFeature0 =
-                    TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-                val tensorImage = TensorImage(DataType.FLOAT32)
-                tensorImage.load(resized)
-                val byteBuffer = tensorImage.buffer
-                inputFeature0.loadBuffer(byteBuffer)
+    private fun predictObject(plasticLabel: List<String>) {
+        if (bitmap != null) {
+            val resized: Bitmap = Bitmap.createScaledBitmap(bitmap!!, 224, 224, true)
+            val model = ConvertedModel.newInstance(requireContext())
 
-                val outputs = model.process(inputFeature0)
-                val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-                val max = getMax(outputFeature0.floatArray)
+            val inputFeature0 =
+                TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
+            val tensorImage = TensorImage(DataType.FLOAT32)
+            tensorImage.load(resized)
+            val byteBuffer = tensorImage.buffer
+            inputFeature0.loadBuffer(byteBuffer)
 
-                model.close()
-                for (i in 0 until outputFeature0.floatArray.size - 1) {
-                    Log.d("main", "${plasticLabel[i]} = " + outputFeature0.floatArray[i].toString())
-                }
-                Log.d("main", "hasil yang tertinggi ke ${plasticLabel[max]}")
-                binding.tvPredictResult.text = "hasil " + plasticLabel[max]
+            val outputs = model.process(inputFeature0)
+            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+            val max = getMax(outputFeature0.floatArray)
+
+            model.close()
+            for (i in 0 until outputFeature0.floatArray.size - 1) {
+                Log.d("main", "${plasticLabel[i]} = " + outputFeature0.floatArray[i].toString())
             }
-
+            Log.d("main", "hasil yang tertinggi ke ${plasticLabel[max]}")
+            binding.tvPredictResult.text = "hasil " + plasticLabel[max]
         }
     }
 
@@ -121,6 +127,7 @@ class ImageDetectionFragment : Fragment() {
                 bitmap =
                     MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, cropUri)
                 binding.imageCamera.setImageURI(cropUri)
+                predictObject(plasticLabel!!)
             } else {
                 Log.d("image", "error")
             }
