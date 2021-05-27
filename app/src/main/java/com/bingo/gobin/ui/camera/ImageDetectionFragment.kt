@@ -33,11 +33,6 @@ class ImageDetectionFragment : Fragment() {
     private val binding: FragmentImageDetectionBinding by viewBinding()
     private var bitmap: Bitmap? = null
 
-    private val fileName = "label.txt"
-    private val inputString = activity?.application?.assets?.open(fileName)?.bufferedReader()
-        .use { it?.readText() }
-    private val plasticLabel = inputString?.split("\n")
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,10 +41,17 @@ class ImageDetectionFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_image_detection, container, false)
     }
 
+    private val fileName = "label.txt"
+    private var inputString : String? = null
+    private var plasticLabel = inputString?.split("\n")
+
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        inputString = requireActivity().application.assets.open(fileName).bufferedReader()
+            .use { it.readText() }
+        plasticLabel = inputString!!.split("\n")
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -66,14 +68,14 @@ class ImageDetectionFragment : Fragment() {
         binding.btnCamera.setOnClickListener {
             startCropActivity()
         }
-//        binding.btnPredict.setOnClickListener {
-//            predictObject(plasticLabel)
-//
-//        }
+        binding.btnPredict.setOnClickListener {
+            predict(plasticLabel!!)
+
+        }
     }
 
-    private fun predictObject(plasticLabel: List<String>) {
-        if (bitmap != null) {
+    private fun predict(plasticLabel: List<String>) {
+        if (this.bitmap != null) {
             val resized: Bitmap = Bitmap.createScaledBitmap(bitmap!!, 224, 224, true)
             val model = ConvertedModel.newInstance(requireContext())
 
@@ -127,11 +129,12 @@ class ImageDetectionFragment : Fragment() {
                 bitmap =
                     MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, cropUri)
                 binding.imageCamera.setImageURI(cropUri)
-                predictObject(plasticLabel!!)
+                predict(plasticLabel!!)
             } else {
                 Log.d("image", "error")
             }
         }
+
 
     }
 
