@@ -18,5 +18,5 @@ data class Order(
     var longitude: String? = "",
     var status: String? = "",
     var date: String? = "",
-    var total_price: String? =""
+    var total_price: String? ="0"
 ) : Serializable

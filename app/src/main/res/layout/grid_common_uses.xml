@@ -9,6 +9,7 @@
         android:id="@+id/materialCardView"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        app:cardBackgroundColor="@color/white"
         android:background="@color/white"
         app:cardElevation="8dp"
         android:layout_margin="8dp"

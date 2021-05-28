@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bingo.gobin.data.model.Order
+import com.bingo.gobin.data.model.User
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.model.ServerTimestamps
@@ -29,12 +30,11 @@ class MainRepositoryImpl {
     }
 
 
-    fun getOrder(id_user: String, status: String): LiveData<out List<Order>> {
+    fun getOrder(id_user: String): LiveData<out List<Order>> {
         val list = MutableLiveData<List<Order>>()
         val order = ArrayList<Order>()
         Firebase.firestore.collection("order")
             .whereEqualTo("id_user", id_user)
-            .whereEqualTo("status", status)
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(
                     querySnapshot: QuerySnapshot?,
@@ -48,6 +48,7 @@ class MainRepositoryImpl {
                     for (document in querySnapshot!!) {
                         order.add(
                             Order(
+                                id= document.id,
                                 id_invoice = document.data["id_invoice"].toString(),
                                 id_user = document.data["id_user"].toString(),
                                 id_driver = document.data["id_driver"].toString(),
@@ -56,7 +57,9 @@ class MainRepositoryImpl {
                                 id_type = document.data["id_type"].toString(),
                                 amount = document.data["amount"].toString(),
                                 latitude = document.data["latitude"].toString(),
-                                longitude = document.data["longitude"].toString()
+                                longitude = document.data["longitude"].toString(),
+                                status = document.data["status"].toString(),
+                                total_price = document.data["total_price"].toString()
                             )
                         )
                     }
@@ -76,6 +79,77 @@ class MainRepositoryImpl {
             })
         return list
     }
+
+    fun getOrderById(id: String): LiveData<out Order> {
+        val order = MutableLiveData<Order>()
+
+        Firebase.firestore.collection("order").document(id)
+            .addSnapshotListener(object : EventListener<DocumentSnapshot?> {
+                override fun onEvent(value: DocumentSnapshot?, e: FirebaseFirestoreException?) {
+                    if (e != null) {
+                        Log.w(ContentValues.TAG, "Listen error", e)
+                        return
+                    }
+                    order.postValue(
+                        Order(
+                            id = value?.id.toString(),
+                            id_invoice = value?.data?.get("id_invoice").toString(),
+                            id_user = value?.data?.get("id_user").toString(),
+                            id_driver = value?.data?.get("id_driver").toString(),
+                            address = value?.data?.get("address").toString(),
+                            id_type = value?.data?.get("id_type").toString(),
+                            amount = value?.data?.get("amount").toString(),
+                            latitude = value?.data?.get("latitude").toString(),
+                            longitude = value?.data?.get("longitude").toString(),
+                            total_price = value?.data?.get("total_price").toString(),
+                            date = value?.data?.get("date").toString(),
+                            status = value?.data?.get("status").toString()
+                        )
+                    )
+
+                }
+            })
+        return order
+    }
+
+    fun updateBalance(id: String, balance: String) {
+
+        Firebase.firestore.collection("users").document(id).update("saldo", balance)
+
+    }
+
+    fun getUserById(id: String): LiveData<out User> {
+        val user = MutableLiveData<User>()
+
+        Firebase.firestore.collection("users").document(id)
+            .addSnapshotListener(object : EventListener<DocumentSnapshot?> {
+                override fun onEvent(value: DocumentSnapshot?, e: FirebaseFirestoreException?) {
+                    if (e != null) {
+                        Log.w(ContentValues.TAG, "Listen error", e)
+                        return
+                    }
+                    user.postValue(
+                        User(
+                            id = value?.id.toString(),
+                            address = value?.data?.get("address").toString(),
+                            latitude = value?.data?.get("latitude").toString(),
+                            longitude = value?.data?.get("longitude").toString(),
+                            phone = value?.data?.get("phone").toString(),
+                            saldo = value?.data?.get("saldo").toString(),
+                            poin = value?.data?.get("poin").toString(),
+                            name = value?.data?.get("name").toString()
+                        )
+                    )
+
+                }
+            })
+        return user
+    }
+
+
+
+
+
 
 
 

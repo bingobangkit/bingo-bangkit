@@ -93,9 +93,12 @@ class ImageDetectionFragment : Fragment() {
             val outputFeature0 = outputs.outputFeature0AsTensorBuffer
             val max = getMax(outputFeature0.floatArray)
 
+
             model.close()
+            Log.d("main",outputFeature0.floatArray.size.toString())
             for (i in 0 until outputFeature0.floatArray.size - 1) {
                 Log.d("main", "${plasticLabel[i]} = " + outputFeature0.floatArray[i].toString())
+
             }
             Log.d("main", "hasil yang tertinggi ke ${plasticLabel[max]}")
             val listPlasticType = DataContent.getContent()[max]
@@ -130,7 +133,7 @@ class ImageDetectionFragment : Fragment() {
 
 
     private fun startCropActivity() {
-        CropImage.activity().setAspectRatio(8, 8).setGuidelines(CropImageView.Guidelines.ON)
+        CropImage.activity().setAspectRatio(3, 3).setGuidelines(CropImageView.Guidelines.ON)
             .start(requireContext(), this)
     }
 

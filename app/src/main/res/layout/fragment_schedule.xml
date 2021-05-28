@@ -42,6 +42,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
+        app:cardBackgroundColor="@color/white"
         android:id="@+id/materialCardView3"
         android:layout_width="match_parent"
         android:layout_height="111dp"
@@ -56,13 +57,13 @@
 
     <TextView
         android:id="@+id/total_pickup_title"
-        android:layout_width="46dp"
+        android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="32dp"
         android:elevation="9dp"
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
-        android:text="Total Pickup"
+        android:text="Total\nPickup"
         android:textColor="@color/navy"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/materialCardView3"
@@ -70,13 +71,13 @@
 
     <TextView
         android:id="@+id/point_earned_title"
-        android:layout_width="51dp"
+        android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginTop="14dp"
         android:elevation="9dp"
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
-        android:text="Point Earned"
+        android:text="Point\nEarned"
         android:textColor="@color/navy"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/wallet_balance_title"
@@ -85,13 +86,13 @@
 
     <TextView
         android:id="@+id/wallet_balance_title"
-        android:layout_width="58dp"
+        android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginEnd="32dp"
         android:elevation="9dp"
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
-        android:text="Wallet Balance"
+        android:text="Wallet\nBalance"
         android:textColor="@color/navy"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
@@ -194,7 +195,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Upcoming Pickup"
+        android:text="List Pickup"
         android:textColor="@color/navy"
         android:visibility="gone"
         tools:visibility="visible"
@@ -202,23 +203,13 @@
         app:layout_constraintStart_toStartOf="@+id/materialCardView3"
         app:layout_constraintTop_toBottomOf="@+id/btn_schedule" />
 
-    <TextView
-        android:id="@+id/live_track_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="Live Tracking Pickup"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:textColor="@color/navy"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/materialCardView3"
-        app:layout_constraintTop_toBottomOf="@+id/rv_schedule" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_schedule"
         android:layout_width="0dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginLeft="1dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/btn_schedule"
@@ -252,17 +243,6 @@
         app:layout_constraintStart_toStartOf="@+id/img_waiting"
         app:layout_constraintTop_toBottomOf="@+id/img_waiting" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container_map"
-        android:layout_width="match_parent"
-        android:layout_height="165dp"
-        android:layout_marginHorizontal="18dp"
-        android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/live_track_title"
-        tools:visibility="visible" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_arriving_track"

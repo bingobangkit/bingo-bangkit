@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bingo.gobin.data.content.CommonUses
 import com.bingo.gobin.data.model.Order
 import com.bingo.gobin.databinding.RowScheduleBinding
 
 class ScheduleAdapter(private val list: List<Order>) : RecyclerView.Adapter<ScheduleAdapter.ListViewHolder>(){
     class ListViewHolder(val binding: RowScheduleBinding) : RecyclerView.ViewHolder(binding.root)
+
+    private var onItemClickCallback: OnItemClickCallback? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         return ListViewHolder(RowScheduleBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -20,8 +23,21 @@ class ScheduleAdapter(private val list: List<Order>) : RecyclerView.Adapter<Sche
         with(holder.binding){
             txtDateRecycle.text = data.date
             txtKgRecycle.text =data.amount+"kg"
+            txtPriceRecycle.text = "Rp. "+data.total_price
+            txtStatusRecycle.text = data.status
+            root.setOnClickListener { onItemClickCallback?.onItemClicked(data) }
         }
+
     }
 
     override fun getItemCount(): Int = list.size
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+
+    interface OnItemClickCallback {
+        fun onItemClicked(order: Order)
+    }
 }

@@ -46,6 +46,7 @@ class EditAddressFragment : Fragment() {
 
         binding.btnPickLocation.setOnClickListener {
             val builder = PlacePicker.IntentBuilder()
+
             try {
                 startActivityForResult(builder.build(requireActivity()), PLACE_PICKER_REQUEST)
             } catch (e: GooglePlayServicesRepairableException) {

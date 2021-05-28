@@ -10,6 +10,9 @@ import com.bingo.gobin.databinding.GridCommonUsesBinding
 
 class ContentAdapter(var list: List<CommonUses> = emptyList()) :
     RecyclerView.Adapter<ContentAdapter.GridViewHolder>() {
+
+
+
     inner class GridViewHolder(val binding: GridCommonUsesBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -34,6 +37,7 @@ class ContentAdapter(var list: List<CommonUses> = emptyList()) :
     }
 
     override fun getItemCount(): Int = list.size
+
 
 
 }

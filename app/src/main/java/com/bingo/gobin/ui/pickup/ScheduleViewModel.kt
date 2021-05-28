@@ -3,6 +3,7 @@ package com.bingo.gobin.ui.pickup
 import androidx.lifecycle.*
 import com.bingo.gobin.data.model.Order
 import com.bingo.gobin.data.model.Type
+import com.bingo.gobin.data.model.User
 import com.bingo.gobin.data.repository.MainRepositoryImpl
 import com.bingo.gobin.util.INITIAL_FILL_ADDRESS
 import com.bingo.gobin.util.lazyDeferred
@@ -26,11 +27,18 @@ class ScheduleViewModel : ViewModel() {
     val latitude = MutableLiveData("")
     val longitude = MutableLiveData("")
 
-    suspend fun getUserOrder(id_user: String, status: String): LiveData<out List<Order>> {
+    suspend fun getUserOrder(id_user: String): LiveData<out List<Order>> {
         val order by lazyDeferred {
-            repository.getOrder(id_user, status)
+            repository.getOrder(id_user)
         }
         return order.await()
+    }
+
+    suspend fun getUserById(id_user: String):LiveData<out User> {
+        val user by lazyDeferred {
+            repository.getUserById(id_user)
+        }
+        return user.await()
     }
 
     fun addPlasticAmount() {
