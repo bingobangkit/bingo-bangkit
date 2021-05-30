@@ -2,23 +2,15 @@
 
 package com.bingo.gobin
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import androidx.navigation.NavController
 import com.bingo.gobin.databinding.ActivityMainBinding
 import com.bingo.gobin.ui.camera.ImageDetectionFragment
 import com.bingo.gobin.ui.home.ContentFragment
 import com.bingo.gobin.ui.pickup.ScheduleFragment
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
-
-    private val viewModel : MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { menu ->
             when (menu.itemId) {
                 R.id.btn_camera_nav -> {
-                    Toast.makeText(this, "hallo", Toast.LENGTH_SHORT).show()
                     supportFragmentManager.commit {
                         replace(R.id.main_fragment_container, ImageDetectionFragment())
                     }

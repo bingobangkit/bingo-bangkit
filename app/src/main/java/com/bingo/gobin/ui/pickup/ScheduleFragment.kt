@@ -68,14 +68,14 @@ class ScheduleFragment : Fragment() {
                 viewModel.getUserOrder(ID_USER_SEMENTARA)
                     .observe(viewLifecycleOwner, {
                         Log.d("TAG", "getListSchedule: $it")
-//                        if (it.isNotEmpty()) {
-//                            uiWaiting()
-//                        } else {
-//                            uiNoSchedule()
-//                        }
+                        if (it.isNotEmpty()) {
+                            uiWaiting()
+                        } else {
+                            uiNoSchedule()
+                        }
                         rvSchedule.apply {
                             layoutManager =
-                                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                                LinearLayoutManager(context)
                             val listOrder = ScheduleAdapter(it)
                             listOrder.setOnItemClickCallback(object : ScheduleAdapter.OnItemClickCallback {
                                 override fun onItemClicked(order: Order) {
@@ -97,64 +97,37 @@ class ScheduleFragment : Fragment() {
         }
     }
 
-//    private fun cekAja() {
-//        lifecycleScope.launch {
-//            viewModel.getUserOrder("ZS91wKaGmkdMvCTZ4Ko6B8EkUw52","waiting").observe(viewLifecycleOwner,{
-//                Log.d("TAG", "cekAja: $it")
-//            })
-//        }
-//    }
-//
-//    fun uiNoSchedule() {
-//        with(binding) {
-//            upcomingTitle.visibility = View.GONE
-//            rvSchedule.visibility = View.GONE
-//            liveTrackTitle.visibility = View.GONE
-//            containerMap.visibility = View.GONE
-//            cardArrivingTrack.visibility = View.GONE
-//            imgWaiting.visibility = View.GONE
-//            upcomingTitle.visibility = View.GONE
-//            txtArriving.visibility = View.GONE
-//            txtWaiting.visibility = View.GONE
-//            btnTrack.visibility = View.GONE
-//            txtNoSchedule.visibility = View.VISIBLE
-//            imgNoSchedule.visibility = View.VISIBLE
-//        }
-//    }
-//
-//    fun uiWaiting() {
-//        with(binding) {
-//            upcomingTitle.visibility = View.VISIBLE
-//            rvSchedule.visibility = View.VISIBLE
-//            liveTrackTitle.visibility = View.GONE
-//            containerMap.visibility = View.GONE
-//            cardArrivingTrack.visibility = View.GONE
-//            imgWaiting.visibility = View.VISIBLE
-//            upcomingTitle.visibility = View.VISIBLE
-//            txtArriving.visibility = View.GONE
-//            txtWaiting.visibility = View.VISIBLE
-//            btnTrack.visibility = View.GONE
-//            txtNoSchedule.visibility = View.GONE
-//            imgNoSchedule.visibility = View.GONE
-//        }
-//    }
-//
-//    fun uiArriving() {
-//        with(binding) {
-//            upcomingTitle.visibility = View.VISIBLE
-//            rvSchedule.visibility = View.VISIBLE
-//            liveTrackTitle.visibility = View.VISIBLE
-//            containerMap.visibility = View.VISIBLE
-//            cardArrivingTrack.visibility = View.VISIBLE
-//            imgWaiting.visibility = View.GONE
-//            upcomingTitle.visibility = View.VISIBLE
-//            txtArriving.visibility = View.VISIBLE
-//            txtWaiting.visibility = View.GONE
-//            btnTrack.visibility = View.VISIBLE
-//            txtNoSchedule.visibility = View.GONE
-//            imgNoSchedule.visibility = View.GONE
-//        }
-//    }
+
+
+    fun uiNoSchedule() {
+        with(binding) {
+            upcomingTitle.visibility = View.GONE
+            rvSchedule.visibility = View.GONE
+            upcomingTitle.visibility = View.GONE
+            txtNoSchedule.visibility = View.VISIBLE
+            imgNoSchedule.visibility = View.VISIBLE
+        }
+    }
+
+    fun uiWaiting() {
+        with(binding) {
+            upcomingTitle.visibility = View.VISIBLE
+            rvSchedule.visibility = View.VISIBLE
+            upcomingTitle.visibility = View.VISIBLE
+            txtNoSchedule.visibility = View.GONE
+            imgNoSchedule.visibility = View.GONE
+        }
+    }
+
+    fun uiArriving() {
+        with(binding) {
+            upcomingTitle.visibility = View.VISIBLE
+            rvSchedule.visibility = View.VISIBLE
+            upcomingTitle.visibility = View.VISIBLE
+            txtNoSchedule.visibility = View.GONE
+            imgNoSchedule.visibility = View.GONE
+        }
+    }
 
 
 }
