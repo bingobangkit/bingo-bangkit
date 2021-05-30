@@ -3,22 +3,29 @@ package com.bingo.gobin.data.repository
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bingo.gobin.data.model.Order
 import com.bingo.gobin.data.model.User
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.model.ServerTimestamps
 import com.google.firebase.firestore.model.mutation.ServerTimestampOperation
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.asDeferred
+import kotlinx.coroutines.tasks.await
 
 
 class MainRepositoryImpl {
-
+    private val users = Firebase.firestore.collection("users")
     fun setOrder(order: Order?) {
         val firestore = FirebaseFirestore.getInstance()
         val orderCollection = firestore.collection("order")
@@ -48,7 +55,7 @@ class MainRepositoryImpl {
                     for (document in querySnapshot!!) {
                         order.add(
                             Order(
-                                id= document.id,
+                                id = document.id,
                                 id_invoice = document.data["id_invoice"].toString(),
                                 id_user = document.data["id_user"].toString(),
                                 id_driver = document.data["id_driver"].toString(),
@@ -147,10 +154,33 @@ class MainRepositoryImpl {
     }
 
 
+    fun register(email:String,password : String,user: User): LiveData<out Boolean> {
+        val task = MutableLiveData<Boolean>()
+        Firebase.auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    user.id = it.result.user?.uid
+                    CoroutineScope(Dispatchers.IO).launch { users.document().set(user).await() }
+                    task.postValue(true)
+                } else {
+                    task.postValue(false)
+                }
+            }
+        return task
+    }
 
 
+    //    fun register(email: String, password: String): LiveData<out Boolean> {
 
-
+    //        repositoryImpl.register(email, password).asTask().addOnCompleteListener { p0 ->
+    //            if (p0.isSuccessful) {
+    //                task.postValue(true)
+    //            } else {
+    //                task.postValue(false)
+    //            }
+    //        }
+    //        return task
+    //    }
 
 
 }

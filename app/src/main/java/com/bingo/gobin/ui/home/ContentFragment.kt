@@ -1,5 +1,6 @@
 package com.bingo.gobin.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bingo.gobin.R
 import com.bingo.gobin.data.content.DataContent
 import com.bingo.gobin.databinding.FragmentContentBinding
+import com.bingo.gobin.ui.auth.AuthActivity
 
 
 @Suppress("DEPRECATION")
@@ -28,10 +30,11 @@ class ContentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvContent.apply {
-
-        }
         with(binding) {
+            binding.imageView.setOnClickListener {
+                val intent = Intent(context,AuthActivity::class.java)
+                startActivity(intent)
+            }
             radioGreen.isChecked = true
             animasikan(radioGreen, true)
             rvContent.apply {

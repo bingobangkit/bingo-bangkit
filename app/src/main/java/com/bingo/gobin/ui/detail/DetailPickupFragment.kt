@@ -74,7 +74,7 @@ class DetailPickupFragment : Fragment() {
             detailViewModel.getUserById(id).observe(viewLifecycleOwner,{user->
                 this@DetailPickupFragment.saldo = user.saldo?.toInt()!!
                 Log.d("detail",this@DetailPickupFragment.saldo.toString())
-                Log.d("detail",user.saldo)
+//                Log.d("detail",user.saldo)
 //                updateBalance(id, (this@DetailPickupFragment.saldo+balance).toString())
             })
         }

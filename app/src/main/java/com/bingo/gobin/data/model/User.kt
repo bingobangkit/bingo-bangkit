@@ -1,7 +1,7 @@
 package com.bingo.gobin.data.model
 
 data class User (
-    val id : String?="",
+    var id : String?="",
     val name: String?="",
     val phone: String?="",
     val latitude: String?="",
