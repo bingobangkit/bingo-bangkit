@@ -181,6 +181,9 @@ class PickUpFragment : Fragment() {
                 val amount =
                     (amount_plastic.toInt() + amount_cardboard.toInt() + amount_steel.toInt()).toString()
                 val total_price = binding.txtTotal.text.toString()
+                val total_price_plastic = binding.txtTotalPlastic.text.toString()
+                val total_price_cardboard = binding.txtTotalCardboard.text.toString()
+                val total_price_steel = binding.txtTotalSteel.text.toString()
                 val id_invoice = DateUtil.generateInvoice(INITIAL_TYPE_INVOICE)
                 val address = this.address.value
                 val latitude = this.latitude.value
@@ -201,6 +204,9 @@ class PickUpFragment : Fragment() {
                     date = date,
                     id_user = ID_USER_SEMENTARA,
                     total_price = total_price,
+                    total_cardboard = total_price_cardboard,
+                    total_plastic = total_price_plastic,
+                    total_steel = total_price_steel,
 
                     )
                 if (setOrder(order)) {
