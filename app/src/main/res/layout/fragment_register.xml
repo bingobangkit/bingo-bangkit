@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/backgroud">
+
     <TextView
         android:id="@+id/title_nav_register"
         android:layout_width="wrap_content"
@@ -31,11 +31,11 @@
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_name"
-        android:inputType="textPersonName"
-        app:boxBackgroundColor="@color/white"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:inputType="textPersonName"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_nav_register">
@@ -48,11 +48,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_email"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:inputType="textEmailAddress"
         app:boxBackgroundColor="@color/white"
-        android:layout_width="340dp"
-        android:layout_marginTop="8dp"
-        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/field_name"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/field_name"
@@ -66,10 +66,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_phone"
-        app:boxBackgroundColor="@color/white"
         android:layout_width="340dp"
-        android:layout_marginTop="8dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/field_email"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/field_email"
@@ -78,17 +78,17 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:hint="Phone" />
+            android:hint="Phone"
+            android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_password"
-        android:inputType="textPassword"
-        app:boxBackgroundColor="@color/white"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:inputType="textPassword"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/field_phone"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/field_phone"
@@ -97,17 +97,17 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="Password" />
+            android:hint="Password"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_repassword"
-        app:boxBackgroundColor="@color/white"
         android:layout_width="340dp"
-        android:inputType="textPassword"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:inputType="textPassword"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/field_password"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/field_password"
@@ -116,19 +116,17 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="Re-type Password" />
+            android:hint="Re-type Password"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txt_set_address_container"
-        app:boxBackgroundColor="@color/white"
         android:layout_width="0dp"
-        android:layout_marginTop="8dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/field_repassword"
         app:layout_constraintStart_toStartOf="@+id/field_repassword"
         app:layout_constraintTop_toBottomOf="@+id/field_repassword">
@@ -140,17 +138,26 @@
             android:hint="Address" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/map_register"
-        android:layout_width="0dp"
-        android:layout_height="196dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/navy"
+    <!--    <com.mapbox.mapboxsdk.maps.MapView-->
+    <!--        android:id="@+id/map_register"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="196dp"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        android:background="@color/navy"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/txt_set_address_container"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/txt_set_address_container"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/txt_set_address_container">-->
+
+    <!--    </com.mapbox.mapboxsdk.maps.MapView>-->
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+
+            android:layout_width="0dp"
+            android:layout_height="196dp"
         app:layout_constraintEnd_toEndOf="@+id/txt_set_address_container"
         app:layout_constraintStart_toStartOf="@+id/txt_set_address_container"
-        app:layout_constraintTop_toBottomOf="@+id/txt_set_address_container">
-
-    </com.mapbox.mapboxsdk.maps.MapView>
+        app:layout_constraintTop_toBottomOf="@+id/txt_set_address_container" />
 
     <Button
         android:id="@+id/btn_pick_location_register"
@@ -160,15 +167,15 @@
         android:text="Register"
         app:layout_constraintEnd_toEndOf="@+id/field_repassword"
         app:layout_constraintStart_toStartOf="@+id/field_repassword"
-        app:layout_constraintTop_toBottomOf="@+id/map_register" />
+        app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
 
     <Button
         android:id="@+id/btn_register"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
-        android:text="Pick Location"
         android:backgroundTint="@color/red_button"
-        app:layout_constraintBottom_toBottomOf="@+id/map_register"
-        app:layout_constraintEnd_toEndOf="@+id/map_register" />
+        android:text="Pick Location"
+        app:layout_constraintBottom_toBottomOf="@+id/frame_layout"
+        app:layout_constraintEnd_toEndOf="@+id/frame_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

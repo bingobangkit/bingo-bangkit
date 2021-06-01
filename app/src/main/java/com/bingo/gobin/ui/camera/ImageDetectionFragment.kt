@@ -25,6 +25,7 @@ import com.bingo.gobin.data.content.DataContent
 import com.bingo.gobin.databinding.FragmentImageDetectionBinding
 import com.bingo.gobin.ml.ConvertedModel
 import com.bingo.gobin.ml.Model
+import com.bingo.gobin.ml.ModelUnquant
 import com.canhub.cropper.CropImage
 import com.canhub.cropper.CropImageView
 import org.tensorflow.lite.DataType
@@ -80,11 +81,11 @@ class ImageDetectionFragment : Fragment() {
 
     private fun predict(plasticLabel: List<String>) {
         if (this.bitmap != null) {
-            val resized: Bitmap = Bitmap.createScaledBitmap(bitmap!!, 200, 200, true)
-            val model = Model.newInstance(requireContext())
+            val resized: Bitmap = Bitmap.createScaledBitmap(bitmap!!, 224, 224, true)
+            val model = ModelUnquant.newInstance(requireContext())
 
             val inputFeature0 =
-                TensorBuffer.createFixedSize(intArrayOf(1, 200, 200, 3), DataType.FLOAT32)
+                TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
             val tensorImage = TensorImage(DataType.FLOAT32)
             tensorImage.load(resized)
             val byteBuffer = tensorImage.buffer
@@ -99,7 +100,6 @@ class ImageDetectionFragment : Fragment() {
             val tempArray = outputFeature0.floatArray.sortedDescending()
             for (i in outputFeature0.floatArray.indices) {
                 Log.d("main", "${plasticLabel[i]} = " + outputFeature0.floatArray[i].toString())
-                Log.d("main",tempArray[i].toString())
             }
 
 

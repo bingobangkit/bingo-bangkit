@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bingo.gobin.R
 import com.bingo.gobin.databinding.FragmentDetailPickupBinding
 import com.bingo.gobin.util.ID_USER_SEMENTARA
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
 
@@ -30,12 +31,20 @@ class DetailPickupFragment : Fragment() {
     ): View {
         binding = FragmentDetailPickupBinding.inflate(layoutInflater)
 
+
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val botnav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        botnav.visibility = View.GONE
+        
         binding.btnBack.setOnClickListener{parentFragmentManager.popBackStack()}
 
         val id = arguments?.getString(ID)
         id?.let { getDetailOrder(it) }
-
-        return binding.root
     }
 
     private fun getDetailOrder(id: String) {
@@ -49,16 +58,19 @@ class DetailPickupFragment : Fragment() {
                 }
 
                 binding.apply {
+                    Log.d("detail", value.amount.toString())
                     txtAddress.text = value.address
                     txtDetailStatus.text = "Order " + value.status
                     txtDetailDate.text = value.date
                     txtDetailInvoice.text = value.id_invoice
-                    txtDetailAmountPlasticBottle.text = value.amount + " Kg"
+                    txtDetailAmountPlasticBottle.text = value.amount_plastic + " Kg"
+                    txtDetailAmountCardboard.text = value.amount_cardboard + " Kg"
+                    txtDetailAmountSteel.text = value.amount_steel + " Kg"
                     txtDetailTotalAmount.text = "Rp. " + value.total_price
                     txtDetailPriceBottleOrderInfo.text = "Rp. " + value.total_price
+                    txtDetailTotalWeight.text = value.amount + " Kg"
                     txtDetailTotalIncome.text =
                         "Rp. " + (value.total_price?.toInt()?.minus(2000)).toString()
-                    txtGetpay.text = "Rp. " + (value.total_price?.toInt()?.minus(2000)).toString()
 
 
 

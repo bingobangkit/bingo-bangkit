@@ -35,30 +35,30 @@ class LoginFragment : Fragment() {
                 }
             }
             btnLogin.setOnClickListener {
-                login()
+//                login()
             }
 
         }
     }
 
-    private fun login() {
-        with(binding) {
-            val email = fieldEmailLogin.text.toString()
-            val password = fieldPassword.text.toString()
-            if (email.isBlank() || password.isBlank()) {
-                Toast.makeText(context, "Field tidak boleh kosong", Toast.LENGTH_SHORT).show()
-            } else {
-                viewModel.login(email, password).observe(viewLifecycleOwner, {
-                    if (it) {
-                        Toast.makeText(context, "Berhasil Login", Toast.LENGTH_SHORT).show()
-                        activity?.finish()
-                    } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-                    }
-                })
-            }
-        }
-    }
+//    private fun login() {
+//        with(binding) {
+//            val email = fieldEmailLogin.text.toString()
+//            val password = fieldPassword.text.toString()
+//            if (email.isBlank() || password.isBlank()) {
+//                Toast.makeText(context, "Field tidak boleh kosong", Toast.LENGTH_SHORT).show()
+//            } else {
+//                viewModel.login(email, password).observe(viewLifecycleOwner, {
+//                    if (it) {
+//                        Toast.makeText(context, "Berhasil Login", Toast.LENGTH_SHORT).show()
+//                        activity?.finish()
+//                    } else {
+//                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+//                    }
+//                })
+//            }
+//        }
+//    }
 
 
 }
