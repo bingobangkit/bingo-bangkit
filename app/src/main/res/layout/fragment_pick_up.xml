@@ -23,7 +23,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/title_nav_pickup"
+        android:id="@+id/title_nav_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
@@ -57,7 +57,7 @@
         android:textColor="@color/navy"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_nav_pickup" />
+        app:layout_constraintTop_toBottomOf="@+id/title_nav_register" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/btn_card_date"
@@ -153,16 +153,16 @@
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/poppins_light"
         android:text="Edit Address"
-        android:visibility="visible"
         android:textColor="@color/blue"
         android:textSize="10sp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/btn_card_address"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         android:layout_marginHorizontal="18dp"
         android:elevation="8dp"
         app:cardCornerRadius="10dp"
@@ -208,6 +208,7 @@
         android:id="@+id/txt_price_plastic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:elevation="12dp"
         android:fontFamily="@font/poppins_light"
         android:includeFontPadding="false"
@@ -217,6 +218,33 @@
         app:layout_constraintBottom_toBottomOf="@+id/txt_type_trash"
         app:layout_constraintStart_toEndOf="@+id/txt_type_trash"
         app:layout_constraintTop_toTopOf="@+id/txt_type_trash" />
+
+    <TextView
+        android:id="@+id/txt_price_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="12dp"
+        android:fontFamily="@font/poppins_light"
+        android:includeFontPadding="false"
+        android:text="(2000/kg)"
+        android:textColor="@color/navy"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_type_trash2"
+        app:layout_constraintEnd_toEndOf="@+id/txt_price_plastic"
+        app:layout_constraintTop_toTopOf="@+id/txt_type_trash2" />
+
+    <TextView
+        android:id="@+id/txt_price_steel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="12dp"
+        android:fontFamily="@font/poppins_light"
+        android:includeFontPadding="false"
+        android:text="(2000/kg)"
+        android:textColor="@color/navy"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_price_card"
+        app:layout_constraintTop_toTopOf="@+id/txt_type_steel" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -234,9 +262,9 @@
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:elevation="12dp"
         android:src="@drawable/ic_bottle"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/cardView" />
 
@@ -253,6 +281,30 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+    <TextView
+        android:id="@+id/txt_type_trash2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="12dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:text="Cardboard"
+        android:textColor="@color/navy"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintStart_toStartOf="@+id/txt_type_trash" />
+
+    <TextView
+        android:id="@+id/txt_type_steel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="12dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:text="Steel"
+        android:textColor="@color/navy"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/txt_type_trash" />
 
     <ImageView
         android:id="@+id/btn_min_mixed"
@@ -276,6 +328,26 @@
         app:layout_constraintStart_toEndOf="@+id/txt_price_plastic" />
 
     <ImageView
+        android:id="@+id/btn_min_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="14dp"
+        android:src="@drawable/ic_btn_min"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_type_trash2"
+        app:layout_constraintEnd_toStartOf="@+id/btn_plus_type"
+        app:layout_constraintStart_toEndOf="@+id/txt_price_plastic" />
+
+    <ImageView
+        android:id="@+id/btn_min_steel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="14dp"
+        android:src="@drawable/ic_btn_min"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_type_steel"
+        app:layout_constraintEnd_toEndOf="@+id/btn_min_card"
+        app:layout_constraintStart_toStartOf="@+id/btn_min_card" />
+
+    <ImageView
         android:id="@+id/btn_plus_mixed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -296,6 +368,27 @@
         app:layout_constraintBottom_toBottomOf="@+id/txt_type_trash"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="@+id/btn_min_type" />
+
+    <ImageView
+        android:id="@+id/btn_plus_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:elevation="14dp"
+        android:src="@drawable/ic_btn_plus"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_kg_card"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/txt_kg_card" />
+
+    <ImageView
+        android:id="@+id/btn_plus_steel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:elevation="14dp"
+        android:src="@drawable/ic_btn_plus"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_min_steel"
+        app:layout_constraintEnd_toEndOf="@+id/cardView" />
 
     <TextView
         android:id="@+id/txt_kg_mixed"
@@ -329,9 +422,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="10dp"
         android:elevation="14dp"
-        android:maxLines="2"
         android:ellipsize="end"
         android:fontFamily="@font/poppins_regular"
+        android:maxLines="2"
         android:text="Please fill the address"
         android:textColor="@color/navy"
         app:layout_constraintBottom_toBottomOf="@+id/btn_card_address"
@@ -416,11 +509,45 @@
         android:id="@+id/textViewxx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:elevation="14dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Total"
-        android:layout_marginTop="8dp"
         android:textColor="@color/navy"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textViewx" />
+
+    <TextView
+        android:id="@+id/textViewxx4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="14dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Steel"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textViewxx3" />
+
+    <TextView
+        android:id="@+id/textViewxx3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="14dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Cardboard"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textViewxx2" />
+
+    <TextView
+        android:id="@+id/textViewxx2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:elevation="14dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Plastic Bottle"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView17"
         app:layout_constraintTop_toBottomOf="@+id/textViewx" />
@@ -433,10 +560,52 @@
         android:elevation="14dp"
         android:fontFamily="@font/poppins_medium"
         android:text="2000"
-        android:textStyle="bold"
         android:textColor="@color/navy"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textViewxx"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_total_steel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:elevation="14dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="2000"
+        android:textColor="@color/navy"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewxx4"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_total_cardboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:elevation="14dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="2000"
+        android:textColor="@color/navy"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewxx3"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_total_plastic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:elevation="14dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="2000"
+        android:textColor="@color/navy"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewxx2"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -496,12 +665,54 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
         android:text="Rp."
-        android:textStyle="bold"
         android:textColor="@color/navy"
         android:textSize="12sp"
+        android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/txt_total"
         app:layout_constraintTop_toTopOf="@+id/txt_total"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/txt_rp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Rp."
+        android:textColor="@color/navy"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/txt_total"
+        app:layout_constraintTop_toBottomOf="@+id/txt_total_cardboard"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/txt_rp3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Rp."
+        android:textColor="@color/navy"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/txt_total"
+        app:layout_constraintTop_toTopOf="@+id/txt_total_cardboard"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/txt_rp4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Rp."
+        android:textColor="@color/navy"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/txt_total"
+        app:layout_constraintTop_toTopOf="@+id/txt_total_plastic"
         tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
@@ -533,10 +744,56 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_plus_type"
         app:layout_constraintStart_toEndOf="@+id/btn_min_type" />
 
+    <TextView
+        android:id="@+id/txt_kg_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="14dp"
+        android:includeFontPadding="false"
+        android:text="1kg"
+        android:textColor="@color/navy"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_min_card"
+        app:layout_constraintEnd_toStartOf="@+id/btn_plus_type"
+        app:layout_constraintStart_toEndOf="@+id/btn_min_type"
+        app:layout_constraintTop_toTopOf="@+id/btn_min_card" />
+
+    <TextView
+        android:id="@+id/txt_kg_steel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="14dp"
+        android:includeFontPadding="false"
+        android:text="1kg"
+        android:textColor="@color/navy"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_min_steel"
+        app:layout_constraintEnd_toStartOf="@+id/btn_plus_type"
+        app:layout_constraintStart_toEndOf="@+id/btn_min_type"
+        app:layout_constraintTop_toTopOf="@+id/btn_min_steel" />
+
     <androidx.constraintlayout.widget.Group
         android:id="@+id/edit_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="txt_address,txt_btn_edit_address" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:elevation="12dp"
+        android:src="@drawable/ic_trash"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:elevation="12dp"
+        android:src="@drawable/ic_steel"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

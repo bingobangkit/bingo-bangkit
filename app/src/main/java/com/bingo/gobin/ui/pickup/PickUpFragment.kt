@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+@SuppressLint("SetTextI18n")
 class PickUpFragment : Fragment() {
     private val viewModel: ScheduleViewModel by activityViewModels()
     private val binding: FragmentPickUpBinding by viewBinding()
@@ -45,22 +45,18 @@ class PickUpFragment : Fragment() {
         bottomNavigationView.visibility = View.GONE
         setOrderInfo()
         getCurrentDate()
+
+        setAmount()
+        setTotal()
+        setPrice()
+        setSchedule()
+
+    }
+
+    private fun setSchedule() {
         viewModel.address.observe(viewLifecycleOwner, {
             binding.txtAddress.text = it
         })
-        viewModel.amountPlastic.observe(viewLifecycleOwner, {
-            val data = it.toString()
-            binding.txtKgRecyle.text = "${data}kg"
-        })
-        viewModel.getTotal().observe(viewLifecycleOwner, {
-            binding.txtTotal.text = it.toString()
-        })
-        lifecycleScope.launch {
-            viewModel.getType().let {
-                binding.txtPricePlastic.text = "(Rp.${it[0].price}/kg)"
-            }
-        }
-
         binding.btnCardDate.setOnClickListener { pickDate() }
         binding.txtDate.setOnClickListener { pickDate() }
         binding.btnCardAddress.setOnClickListener {
@@ -70,12 +66,59 @@ class PickUpFragment : Fragment() {
             }
         }
         binding.btnSchedulePickup.setOnClickListener {
-            if(schedulePickup()){
+            if (schedulePickup()) {
                 parentFragmentManager.popBackStack()
-            }else{
+            } else {
                 Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+
+    private fun setPrice() {
+        lifecycleScope.launch {
+            viewModel.getType().let {
+                binding.txtPricePlastic.text = "(Rp.${it[0].price}/kg)"
+                binding.txtPriceCard.text = "(Rp.${it[1].price}/kg)"
+                binding.txtPriceSteel.text = "(Rp.${it[2].price}/kg)"
+            }
+        }
+    }
+
+    private fun setTotal() {
+        viewModel.totalPlastic.observe(viewLifecycleOwner, {
+            binding.txtTotalPlastic.text = it.toString()
+        })
+
+        viewModel.totalCard.observe(viewLifecycleOwner, {
+            binding.txtTotalCardboard.text = it.toString()
+        })
+        viewModel.totalSteel.observe(viewLifecycleOwner, {
+            binding.txtTotalSteel.text = it.toString()
+        })
+
+
+
+
+        viewModel.getTotal().observe(viewLifecycleOwner, {
+            binding.txtTotal.text = it.toString()
+        })
+    }
+
+    private fun setAmount() {
+        viewModel.amountPlastic.observe(viewLifecycleOwner, {
+            val data = it.toString()
+            binding.txtKgRecyle.text = "${data}kg"
+        })
+        viewModel.amountCardboard.observe(viewLifecycleOwner, {
+            val data = it.toString()
+            binding.txtKgCard.text = "${data}kg"
+        })
+
+        viewModel.amountSteel.observe(viewLifecycleOwner, {
+            val data = it.toString()
+            binding.txtKgSteel.text = "${data}kg"
+        })
     }
 
     @SuppressLint("SimpleDateFormat", "ResourceAsColor")
@@ -105,8 +148,15 @@ class PickUpFragment : Fragment() {
     private fun setOrderInfo() {
         with(binding) {
             btnBack.setOnClickListener { requireActivity().onBackPressed() }
+
             btnPlusType.setOnClickListener { viewModel.addPlasticAmount() }
             btnMinType.setOnClickListener { viewModel.minPlasticAmount() }
+
+            btnPlusCard.setOnClickListener { viewModel.addCardboardAmount() }
+            btnMinCard.setOnClickListener { viewModel.minCardboardAmount() }
+
+            btnPlusSteel.setOnClickListener { viewModel.addSteelAmount() }
+            btnMinSteel.setOnClickListener { viewModel.minSteelAmount() }
         }
 
 
@@ -119,34 +169,41 @@ class PickUpFragment : Fragment() {
         bottomNavigationView.visibility = View.VISIBLE
     }
 
-    private fun schedulePickup() : Boolean {
-        var sch_status : Boolean  = false
+    private fun schedulePickup(): Boolean {
+        var sch_status = false
         lifecycleScope.launchWhenStarted {
-            with(viewModel){
+            with(viewModel) {
                 val date = binding.txtDate.text.toString()
                 val id_type = INITIAL_ID_TYPE    //viewModel.getType().find { it.id == "1" }?.id
-                val amount = amountPlastic.value.toString()
+                val amount_plastic = amountPlastic.value.toString()
+                val amount_cardboard = amountCardboard.value.toString()
+                val amount_steel = amountSteel.value.toString()
+                val amount =
+                    (amount_plastic.toInt() + amount_cardboard.toInt() + amount_steel.toInt()).toString()
                 val total_price = binding.txtTotal.text.toString()
                 val id_invoice = DateUtil.generateInvoice(INITIAL_TYPE_INVOICE)
                 val address = this.address.value
                 val latitude = this.latitude.value
                 val longitude = this.longitude.value
-                var status = INITIAL_STATUS_ORDER
+                val status = INITIAL_STATUS_ORDER
 
                 val order = Order(
                     id_invoice = id_invoice,
                     id_type = id_type,
                     address = address,
                     amount = amount,
+                    amount_plastic = amount_plastic,
+                    amount_cardboard = amount_cardboard,
+                    amount_steel = amount_steel,
                     latitude = latitude,
                     longitude = longitude,
                     status = status,
                     date = date,
-                    id_user = ID_USER_SEMENTARA ,
+                    id_user = ID_USER_SEMENTARA,
                     total_price = total_price,
 
                     )
-                if(setOrder(order)){
+                if (setOrder(order)) {
                     sch_status = true
                 }
             }
