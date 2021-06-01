@@ -14,6 +14,8 @@ import com.bingo.gobin.data.model.User
 import com.bingo.gobin.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.mapbox.mapboxsdk.maps.MapView
+import com.mapbox.mapboxsdk.maps.MapboxMap
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -21,6 +23,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class RegisterFragment : Fragment() {
     private val viewModel: AuthViewModel by viewModels()
     private val binding: FragmentRegisterBinding by viewBinding()
+    private lateinit var mapBox : MapView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,8 +33,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.btnRegisterPage.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             register()
         }
     }

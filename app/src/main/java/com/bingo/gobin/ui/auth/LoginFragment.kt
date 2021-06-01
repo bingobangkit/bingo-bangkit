@@ -10,7 +10,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bingo.gobin.R
-import com.bingo.gobin.databinding.ActivityAuthBinding
 import com.bingo.gobin.databinding.FragmentLoginBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -28,18 +27,37 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnRegister.setOnClickListener {
-            parentFragmentManager.commit {
-                replace(R.id.fragmentContainerView, RegisterFragment())
+
+        with(binding) {
+            btnRegister.setOnClickListener {
+                parentFragmentManager.commit {
+                    replace(R.id.fragmentContainerView, RegisterFragment())
+                }
+            }
+            btnLogin.setOnClickListener {
+                login()
+            }
+
+        }
+    }
+
+    private fun login() {
+        with(binding) {
+            val email = fieldEmailLogin.text.toString()
+            val password = fieldPassword.text.toString()
+            if (email.isBlank() || password.isBlank()) {
+                Toast.makeText(context, "Field tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.login(email, password).observe(viewLifecycleOwner, {
+                    if (it) {
+                        Toast.makeText(context, "Berhasil Login", Toast.LENGTH_SHORT).show()
+                        activity?.finish()
+                    } else {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    }
+                })
             }
         }
-//        viewModel.register("tatang@kalan.com", "124578").observe(viewLifecycleOwner,{
-//            if(it){
-//                Toast.makeText(context, "Berhasil", Toast.LENGTH_SHORT).show()
-//            }else{
-//                Toast.makeText(context, "Gagal", Toast.LENGTH_SHORT).show()
-//            }
-//        })
     }
 
 

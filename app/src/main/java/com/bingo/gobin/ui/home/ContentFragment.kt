@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bingo.gobin.R
 import com.bingo.gobin.data.content.DataContent
 import com.bingo.gobin.databinding.FragmentContentBinding
+import com.bingo.gobin.ui.ProfileActivity
 import com.bingo.gobin.ui.auth.AuthActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 @Suppress("DEPRECATION")
@@ -32,8 +35,15 @@ class ContentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             binding.imageView.setOnClickListener {
-                val intent = Intent(context,AuthActivity::class.java)
-                startActivity(intent)
+                val auth = Firebase.auth.currentUser
+                if (auth == null){
+                    val intent = Intent(context,AuthActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    val intent = Intent(context,ProfileActivity::class.java)
+                    startActivity(intent)
+                }
+
             }
             radioGreen.isChecked = true
             animasikan(radioGreen, true)

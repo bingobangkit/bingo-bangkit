@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.RegisterFragment">
+    android:background="@color/backgroud"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/title_nav_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:text="Register"
+        android:textColor="@color/navy"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_back" />
 
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_name"
+        android:inputType="textPersonName"
+        app:boxBackgroundColor="@color/white"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline8">
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_nav_register">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -24,10 +48,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_email"
+        android:inputType="textEmailAddress"
+        app:boxBackgroundColor="@color/white"
         android:layout_width="340dp"
-        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/field_phone"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/field_name"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/field_name"
@@ -41,10 +66,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_phone"
+        app:boxBackgroundColor="@color/white"
         android:layout_width="340dp"
-        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/field_password"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/field_email"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/field_email"
@@ -53,15 +78,17 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="phone"
             android:hint="Phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_password"
+        android:inputType="textPassword"
+        app:boxBackgroundColor="@color/white"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/field_repassword"
         app:layout_constraintEnd_toEndOf="@+id/field_phone"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/field_phone"
@@ -70,15 +97,17 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/field_repassword"
+        app:boxBackgroundColor="@color/white"
         android:layout_width="340dp"
+        android:inputType="textPassword"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_register_page"
         app:layout_constraintEnd_toEndOf="@+id/field_password"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/field_password"
@@ -87,50 +116,59 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="Re-type Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="17dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="101dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp"
-        app:layout_constraintGuide_percent="0.9367397" />
 
-    <Button
-        android:id="@+id/btn_register_page"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_set_address_container"
+        app:boxBackgroundColor="@color/white"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:text="Register"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/field_repassword"
         app:layout_constraintStart_toStartOf="@+id/field_repassword"
-        app:layout_constraintTop_toBottomOf="@+id/field_repassword" />
+        app:layout_constraintTop_toBottomOf="@+id/field_repassword">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_set_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/map_register"
+        android:layout_width="0dp"
+        android:layout_height="196dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/navy"
+        app:layout_constraintEnd_toEndOf="@+id/txt_set_address_container"
+        app:layout_constraintStart_toStartOf="@+id/txt_set_address_container"
+        app:layout_constraintTop_toBottomOf="@+id/txt_set_address_container">
+
+    </com.mapbox.mapboxsdk.maps.MapView>
+
+    <Button
+        android:id="@+id/btn_pick_location_register"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:text="Register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/field_repassword"
+        app:layout_constraintStart_toStartOf="@+id/field_repassword"
+        app:layout_constraintTop_toBottomOf="@+id/map_register" />
 
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:text="Pick Location"
+        android:backgroundTint="@color/red_button"
+        app:layout_constraintBottom_toBottomOf="@+id/map_register"
+        app:layout_constraintEnd_toEndOf="@+id/map_register" />
 </androidx.constraintlayout.widget.ConstraintLayout>
