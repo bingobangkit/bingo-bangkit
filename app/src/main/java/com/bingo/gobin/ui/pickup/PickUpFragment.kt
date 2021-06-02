@@ -20,6 +20,11 @@ import com.bingo.gobin.util.INITIAL_ID_TYPE
 import com.bingo.gobin.util.INITIAL_STATUS_ORDER
 import com.bingo.gobin.util.INITIAL_TYPE_INVOICE
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mapbox.android.core.location.LocationEngineCallback
+import com.mapbox.android.core.location.LocationEngineResult
+import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
+import com.mapbox.mapboxsdk.geometry.LatLng
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroud"
+    tools:context=".ui.auth.RegisterActivity"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
@@ -140,7 +142,7 @@
             android:hint="Address" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.mapbox.mapboxsdk.maps.MapView
+    <FrameLayout
         android:id="@+id/map_register"
         android:layout_width="0dp"
         android:layout_height="196dp"
@@ -148,12 +150,10 @@
         android:background="@color/navy"
         app:layout_constraintEnd_toEndOf="@+id/txt_set_address_container"
         app:layout_constraintStart_toStartOf="@+id/txt_set_address_container"
-        app:layout_constraintTop_toBottomOf="@+id/txt_set_address_container">
-
-    </com.mapbox.mapboxsdk.maps.MapView>
-
+        app:layout_constraintTop_toBottomOf="@+id/txt_set_address_container"
+        />
     <Button
-        android:id="@+id/btn_pick_location_register"
+        android:id="@+id/btn_register"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -163,12 +163,13 @@
         app:layout_constraintTop_toBottomOf="@+id/map_register" />
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_pick_location_register"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
-        android:text="Pick Location"
         android:backgroundTint="@color/red_button"
+        android:text="Pick Location"
         app:layout_constraintBottom_toBottomOf="@+id/map_register"
-        app:layout_constraintEnd_toEndOf="@+id/map_register" />
+        app:layout_constraintEnd_toEndOf="@+id/map_register"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
