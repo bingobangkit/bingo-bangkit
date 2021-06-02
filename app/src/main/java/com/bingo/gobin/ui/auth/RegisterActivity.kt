@@ -122,7 +122,6 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener {
 
             // Retrieve the information from the selected location's CarmenFeature
             val carmenFeature = PlacePicker.getPlace(data)
-            val json = carmenFeature?.toJson()
             val latitude = carmenFeature?.center()?.latitude()
             val longitude = carmenFeature?.center()?.longitude()
             viewModel._latlng.postValue(LatLng(latitude!!, longitude!!))
@@ -194,23 +193,7 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener {
         }
     }
 
-    private fun showDicodingSpace(latLng: LatLng) {
-        val dicodingSpace = latLng
-        symbolManager.create(
-            SymbolOptions()
-                .withLatLng(LatLng(dicodingSpace.latitude, dicodingSpace.longitude))
-                .withIconImage(ICON_ID)
-                .withIconSize(1.5f)
-                .withIconOffset(arrayOf(0f, -1.5f))
-                .withTextField("Dicoding Space")
-                .withTextHaloColor("rgba(255, 255, 255, 100)")
-                .withTextHaloWidth(5.0f)
-                .withTextAnchor("top")
-                .withTextOffset(arrayOf(0f, 1.5f))
-                .withDraggable(true)
-        )
-        mapBoxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dicodingSpace, 8.0))
-    }
+
 
     private inner class LocationChangeListeningCallback :
         LocationEngineCallback<LocationEngineResult> {

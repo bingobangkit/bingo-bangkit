@@ -17,11 +17,11 @@ class AuthViewModel : ViewModel() {
     val last_latlng = MutableLiveData<LatLng>().apply { value = null }
 
 
-//    fun register(email: String, password:String, user: User): LiveData<out Boolean> {
-//        return repositoryImpl.register(email, password, user)
-//    }
+    fun register(email: String, password:String, user: User): LiveData<out Boolean> {
+        return repositoryImpl.register(email, password, user)
+    }
 
-//    fun login(email: String, password: String): LiveData<out Boolean> {
-//        return repositoryImpl.login(email, password)
-//    }
+    fun login(email: String, password: String): LiveData<out Boolean> {
+        return repositoryImpl.login(email, password)
+    }
 }

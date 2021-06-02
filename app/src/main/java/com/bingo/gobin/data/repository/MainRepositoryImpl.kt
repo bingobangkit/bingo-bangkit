@@ -182,17 +182,18 @@ class MainRepositoryImpl {
     }
 
 
-    //    fun register(email: String, password: String): LiveData<out Boolean> {
-
-    //        repositoryImpl.register(email, password).asTask().addOnCompleteListener { p0 ->
-    //            if (p0.isSuccessful) {
-    //                task.postValue(true)
-    //            } else {
-    //                task.postValue(false)
-    //            }
-    //        }
-    //        return task
-    //    }
+    fun login(email : String, password: String): LiveData<out Boolean> {
+        val task = MutableLiveData<Boolean>()
+        Firebase.auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    task.postValue(true)
+                } else {
+                    task.postValue(false)
+                }
+            }
+        return task
+    }
 
 
 }

@@ -10,7 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bingo.gobin.R
 import com.bingo.gobin.databinding.ActivityAuthBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-
+@ExperimentalCoroutinesApi
 class AuthActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
     private val binding: ActivityAuthBinding by viewBinding()
@@ -32,6 +32,7 @@ class AuthActivity : AppCompatActivity() {
 
         }
     }
+
     private fun login() {
         with(binding) {
             val email = fieldEmailLogin.text.toString()

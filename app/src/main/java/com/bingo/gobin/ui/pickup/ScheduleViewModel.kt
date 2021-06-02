@@ -11,13 +11,15 @@ import com.bingo.gobin.util.lazyDeferred
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.mapbox.mapboxsdk.geometry.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class ScheduleViewModel : ViewModel() {
-
+    val _latlng = MutableLiveData<LatLng>().apply { value = null }
+    val last_latlng = MutableLiveData<LatLng>().apply { value = null }
     private val repository by lazy { MainRepositoryImpl() }
     private val _amountPlastic = MutableLiveData<Int>().apply { value = 0 }
     private val _amountCardboard = MutableLiveData<Int>().apply { value = 0 }
