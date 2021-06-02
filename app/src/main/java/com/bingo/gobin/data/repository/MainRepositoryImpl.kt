@@ -1,18 +1,26 @@
 package com.bingo.gobin.data.repository
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bingo.gobin.data.model.Order
 import com.bingo.gobin.data.model.User
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.model.ServerTimestamps
+import com.google.firebase.firestore.model.mutation.ServerTimestampOperation
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.asDeferred
 import kotlinx.coroutines.tasks.await
 
 
@@ -58,7 +66,13 @@ class MainRepositoryImpl {
                                 latitude = document.data["latitude"].toString(),
                                 longitude = document.data["longitude"].toString(),
                                 status = document.data["status"].toString(),
-                                total_price = document.data["total_price"].toString()
+                                total_price = document.data["total_price"].toString(),
+                                amount_plastic =  document.data["amount_plastic"].toString(),
+                                amount_cardboard = document.data["amount_cardboard"].toString(),
+                                amount_steel = document.data["amount_steel"].toString(),
+                                total_plastic = document.data["total_plastic"].toString(),
+                                total_cardboard = document.data["total_cardboard"].toString(),
+                                total_steel = document.data["total_steel"].toString()
                             )
                         )
                     }
@@ -102,7 +116,13 @@ class MainRepositoryImpl {
                             longitude = value?.data?.get("longitude").toString(),
                             total_price = value?.data?.get("total_price").toString(),
                             date = value?.data?.get("date").toString(),
-                            status = value?.data?.get("status").toString()
+                            status = value?.data?.get("status").toString(),
+                            amount_plastic = value?.data?.get("amount_plastic").toString(),
+                            amount_cardboard = value?.data?.get("amount_cardboard").toString(),
+                            amount_steel = value?.data?.get("amount_steel").toString(),
+                            total_plastic = value?.data?.get("total_plastic").toString(),
+                            total_cardboard = value?.data?.get("total_cardboard").toString(),
+                            total_steel = value?.data?.get("total_steel").toString()
                         )
                     )
 
@@ -146,28 +166,13 @@ class MainRepositoryImpl {
     }
 
 
-    fun register(email: String, password: String, user: User): LiveData<out Boolean> {
+    fun register(email:String,password : String,user: User): LiveData<out Boolean> {
         val task = MutableLiveData<Boolean>()
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     user.id = it.result.user?.uid
-                    CoroutineScope(Dispatchers.IO).launch {
-                        users.document(user.id.toString()).set(user).await()
-                    }
-                    task.postValue(true)
-                } else {
-                    task.postValue(false)
-                }
-            }
-        return task
-    }
-
-    fun login(email : String, password: String): LiveData<out Boolean> {
-        val task = MutableLiveData<Boolean>()
-        Firebase.auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
+                    CoroutineScope(Dispatchers.IO).launch { users.document().set(user).await() }
                     task.postValue(true)
                 } else {
                     task.postValue(false)
