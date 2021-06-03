@@ -24,6 +24,7 @@ import com.bingo.gobin.R
 import com.bingo.gobin.data.content.DataContent
 import com.bingo.gobin.databinding.FragmentImageDetectionBinding
 import com.bingo.gobin.ml.ModelUnquant
+import com.bingo.gobin.ml.PlasticTypeDetection
 import com.canhub.cropper.CropImage
 import com.canhub.cropper.CropImageView
 import org.tensorflow.lite.DataType
@@ -80,7 +81,7 @@ class ImageDetectionFragment : Fragment() {
     private fun predict(plasticLabel: List<String>) {
         if (this.bitmap != null) {
             val resized: Bitmap = Bitmap.createScaledBitmap(bitmap!!, 224, 224, true)
-            val model = ModelUnquant.newInstance(requireContext())
+            val model = PlasticTypeDetection.newInstance(requireContext())
 
             val inputFeature0 =
                 TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)

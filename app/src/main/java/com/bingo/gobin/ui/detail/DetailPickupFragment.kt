@@ -40,7 +40,7 @@ class DetailPickupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val botnav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         botnav.visibility = View.GONE
-        
+
         binding.btnBack.setOnClickListener{parentFragmentManager.popBackStack()}
 
         val id = arguments?.getString(ID)
