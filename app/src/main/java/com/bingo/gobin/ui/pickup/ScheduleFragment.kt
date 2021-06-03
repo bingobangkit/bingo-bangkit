@@ -16,6 +16,7 @@ import com.bingo.gobin.data.model.Order
 import com.bingo.gobin.databinding.FragmentScheduleBinding
 import com.bingo.gobin.ui.detail.DetailPickupFragment
 import com.bingo.gobin.util.ID_USER_SEMENTARA
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
 
@@ -35,6 +36,8 @@ class ScheduleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val botnav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        botnav.visibility = View.VISIBLE
         with(binding) {
             btnSchedule.setOnClickListener {
                 parentFragmentManager.commit {

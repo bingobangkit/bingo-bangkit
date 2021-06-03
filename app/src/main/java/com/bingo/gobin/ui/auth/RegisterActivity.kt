@@ -2,9 +2,7 @@ package com.bingo.gobin.ui.auth
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -16,20 +14,19 @@ import com.mapbox.android.core.location.*
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
-import com.mapbox.mapboxsdk.maps.*
+import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.MapboxMapOptions
+import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.maps.SupportMapFragment
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
-import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 import com.mapbox.mapboxsdk.plugins.places.picker.PlacePicker
 import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import java.lang.Exception
 
 
 @Suppress("DEPRECATION")
@@ -47,7 +44,6 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener {
 
     companion object {
         const val REQUEST_CODE = 5678
-        private const val ICON_ID = "ICON_ID"
         const val DEFAULT_INTERVAL_IN_MILLISECONDS = 2000L
         const val DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5
     }
@@ -129,30 +125,37 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener {
     }
 
     private fun register() {
-        val name = binding.fieldName.editText?.text.toString()
-        val email = binding.fieldEmail.editText?.text.toString()
-        val phone = binding.fieldPhone.editText?.text.toString()
-        val password = binding.fieldPassword.editText?.text.toString()
-        val data = User(name = name, phone = phone)
+        viewModel._latlng.observe(this,{latlng->
+            val latitude = latlng.latitude.toString()
+            val longitude = latlng.longitude.toString()
+            val name = binding.fieldName.editText?.text.toString()
+            val email = binding.fieldEmail.editText?.text.toString()
+            val phone = binding.fieldPhone.editText?.text.toString()
+            val password = binding.fieldPassword.editText?.text.toString()
+            val address = binding.txtSetAddress.text.toString()
+            val data = User(name = name, phone = phone,address = address, latitude = latitude, longitude = longitude)
+            if (name.isBlank() || email.isBlank() || phone.isBlank() || password.isBlank()) {
+                Toast.makeText(this, "Cek kembali form Anda!", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.register(user = data, email = email, password = password)
+                    .observe(this, {
+                        if (it) {
+                            Toast.makeText(
+                                this,
+                                "Berhasil Register, silakan login!",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            finish()
+                        } else {
+                            Toast.makeText(this, "Gagal Register", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+            }
+        })
 
-        if (name.isBlank() || email.isBlank() || phone.isBlank() || password.isBlank()) {
-            Toast.makeText(this, "Cek kembali form Anda!", Toast.LENGTH_SHORT).show()
-            return
-        } else {
-            viewModel.register(user = data, email = email, password = password)
-                .observe(this, {
-                    if (it) {
-                        Toast.makeText(
-                            this,
-                            "Berhasil Register, silakan login!",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    } else {
-                        Toast.makeText(this, "Gagal Register", Toast.LENGTH_SHORT).show()
-                    }
-                })
-        }
+
+
 
     }
 
@@ -207,12 +210,6 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener {
                 val latLng = LatLng(lat, lng)
 
                 if (result.lastLocation != null) {
-                    val position = CameraPosition.Builder()
-                        .target(latLng)
-                        .zoom(13.0) //disable this for not follow zoom
-                        .tilt(10.0)
-                        .build()
-//                    mapBoxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position))
                     viewModel.last_latlng.postValue(latLng)
                 }
             }

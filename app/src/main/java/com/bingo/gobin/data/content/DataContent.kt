@@ -61,7 +61,7 @@ object DataContent {
                     CommonUses(name = "Rope", image = R.drawable.pp1),
                     CommonUses(name = "Plastic", image = R.drawable.pp2),
                     CommonUses(name = "Food Container", image = R.drawable.pp3),
-                    CommonUses(name = "Diapers", image =R.drawable.pp3),
+                    CommonUses(name = "Diapers", image =R.drawable.pp4),
                 )
 
             ),

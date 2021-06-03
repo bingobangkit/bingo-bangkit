@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroud"
     tools:context=".ui.auth.AuthActivity">
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
+        app:boxBackgroundColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         app:endIconMode="password_toggle"
@@ -26,6 +28,9 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:textColor="@color/navy"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_medium"
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +45,7 @@
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
+        app:boxBackgroundColor="@color/white"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"

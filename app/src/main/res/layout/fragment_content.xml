@@ -12,19 +12,19 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
+        android:src="@drawable/ic_user"
         app:layout_constraintEnd_toEndOf="@+id/materialCardView2"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_user" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_marginStart="11dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
         android:fontFamily="@font/poppins_semibold"
+        android:includeFontPadding="false"
         android:text="Go-Bin"
         android:textColor="@color/navy"
         android:textSize="18sp"
-        android:includeFontPadding="false"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -180,6 +180,7 @@
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
@@ -243,16 +244,16 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:id="@+id/rv_content"
-        app:spanCount="2"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:spanCount="2"
         tools:listitem="@layout/grid_common_uses" />
 
     <androidx.constraintlayout.widget.Group

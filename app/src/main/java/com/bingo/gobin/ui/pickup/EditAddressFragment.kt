@@ -1,9 +1,11 @@
 @file:Suppress("DEPRECATION")
 
 package com.bingo.gobin.ui.pickup
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
 import android.text.Editable
@@ -11,14 +13,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bingo.gobin.R
 import com.bingo.gobin.databinding.FragmentEditAddressBinding
 import com.mapbox.android.core.location.*
+import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
+import com.mapbox.mapboxsdk.location.modes.CameraMode
+import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.plugins.places.picker.*
 import com.mapbox.mapboxsdk.plugins.places.picker.PlacePicker.getPlace
 import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions
@@ -26,7 +33,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
 @Suppress("DEPRECATION")
-class EditAddressFragment : Fragment() {
+class EditAddressFragment : Fragment(), PermissionsListener {
     private val viewModel: ScheduleViewModel by activityViewModels()
     companion object{
         private const val DEFAULT_INTERVAL_IN_MILLISECONDS = 2000L
@@ -39,7 +46,7 @@ class EditAddressFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    @SuppressLint("MissingPermission")
+
     private fun initLocationEngine() {
         locationEngine = LocationEngineProvider.getBestLocationEngine(requireContext())
         val request = LocationEngineRequest
@@ -47,10 +54,19 @@ class EditAddressFragment : Fragment() {
             .setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
             .setMaxWaitTime(DEFAULT_MAX_WAIT_TIME)
             .build()
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
         locationEngine.requestLocationUpdates(request, callback, Looper.getMainLooper())
         locationEngine.getLastLocation(callback)
     }
-
 
 
     override fun onCreateView(
@@ -137,4 +153,19 @@ class EditAddressFragment : Fragment() {
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
         }
     }
+
+    override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
+        Toast.makeText(context, "Perlu Izin Lokasi", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPermissionResult(granted: Boolean) {
+        if (granted){
+            callback = LocationChangeListeningCallback()
+            initLocationEngine()
+        }else{
+            Toast.makeText(context, "Perlu Izin Lokasi", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
 }
