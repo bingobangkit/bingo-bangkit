@@ -23,8 +23,6 @@ import coil.transform.RoundedCornersTransformation
 import com.bingo.gobin.R
 import com.bingo.gobin.data.content.DataContent
 import com.bingo.gobin.databinding.FragmentImageDetectionBinding
-import com.bingo.gobin.ml.ConvertedModel
-import com.bingo.gobin.ml.Model
 import com.bingo.gobin.ml.ModelUnquant
 import com.canhub.cropper.CropImage
 import com.canhub.cropper.CropImageView

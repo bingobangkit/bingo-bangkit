@@ -106,6 +106,43 @@ class ContentFragment : Fragment() {
                 }
             }
 
+            radioPs.setOnCheckedChangeListener { buttonView, isChecked ->
+                animasikan(buttonView, isChecked)
+                val co = DataContent.getContent().find { it.name == "PS" }
+                if (isChecked) {
+                    mAdapter.list = co?.commonUses ?: emptyList()
+                    rvContent.adapter = mAdapter
+                    recycleType.text = co!!.type
+                    recycleDesc.text = co.description
+                    materialCardView2.setCardBackgroundColor(resources.getColor(R.color.red))
+                }
+            }
+
+            radioPp.setOnCheckedChangeListener { buttonView, isChecked ->
+                animasikan(buttonView, isChecked)
+                val co = DataContent.getContent().find { it.name == "PP" }
+                if (isChecked) {
+                    mAdapter.list = co?.commonUses ?: emptyList()
+                    rvContent.adapter = mAdapter
+                    recycleType.text = co!!.type
+                    recycleDesc.text = co.description
+                    materialCardView2.setCardBackgroundColor(resources.getColor(R.color.yellow))
+                }
+            }
+
+
+            radioOther.setOnCheckedChangeListener { buttonView, isChecked ->
+                animasikan(buttonView, isChecked)
+                val co = DataContent.getContent().find { it.name == "OTHERS" }
+                if (isChecked) {
+                    mAdapter.list = co?.commonUses ?: emptyList()
+                    rvContent.adapter = mAdapter
+                    recycleType.text = co!!.type
+                    recycleDesc.text = co.description
+                    materialCardView2.setCardBackgroundColor(resources.getColor(R.color.red))
+                }
+            }
+
 
         }
 

@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">Go-Bin</string>
-    <string name="icon_home">Home</string>
-    <string name="icon_camera">Camera</string>
-    <string name="icon_calendar">Calendar</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiZ29iaW5iYW5na2l0IiwiYSI6ImNrcGU2ZjZxbzAwZGczMG1tc3ZvdTY1cWUifQ.5-8rgbi2C0JY-ukpl05pTA</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="access_token">pk.eyJ1IjoiZ29iaW5iYW5na2l0IiwiYSI6ImNrcGU2ZjZxbzAwZGczMG1tc3ZvdTY1cWUifQ.5-8rgbi2C0JY-ukpl05pTA</string>
 </resources>
