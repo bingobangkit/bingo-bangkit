@@ -32,8 +32,6 @@ class ScheduleViewModel : ViewModel() {
     val totalPlastic = _totalPlastic
     val totalCard = _totalCard
     val totalSteel = _totalSteel
-
-
     val datePickup = _datePickup
     val amountPlastic: LiveData<Int> = _amountPlastic
     val amountCardboard: LiveData<Int> = _amountCardboard
@@ -41,6 +39,7 @@ class ScheduleViewModel : ViewModel() {
     val address: LiveData<String> = _address
     val latitude = MutableLiveData("")
     val longitude = MutableLiveData("")
+
 
 
     suspend fun getUserOrder(id_user: String): LiveData<out List<Order>> {
@@ -59,10 +58,11 @@ class ScheduleViewModel : ViewModel() {
 
     fun addPlasticAmount() {
         viewModelScope.launch(Dispatchers.IO) {
+            val listPrice = getType()
             val amount = _amountPlastic.value
             _amountPlastic.postValue(amount!! + 1)
             amountPlastic.asFlow().collect {
-                val price = getType()[0].price
+                val price = listPrice[0].price
                 _totalPlastic.postValue(price * it)
             }
         }
@@ -70,11 +70,12 @@ class ScheduleViewModel : ViewModel() {
 
     fun minPlasticAmount() {
         viewModelScope.launch(Dispatchers.IO) {
+            val listPrice = getType()
             val amount = _amountPlastic.value
             if (_amountPlastic.value != 0){
                 _amountPlastic.postValue(amount!! - 1)
                 amountPlastic.asFlow().collect {
-                    val price = getType()[0].price
+                    val price = listPrice[0].price
                     _totalPlastic.postValue(price * it)
                 }
             }
@@ -84,10 +85,11 @@ class ScheduleViewModel : ViewModel() {
 
     fun addCardboardAmount() {
         viewModelScope.launch(Dispatchers.IO) {
+            val listPrice = getType()
             val amount = _amountCardboard.value
             _amountCardboard.postValue(amount!! + 1)
             amountCardboard.asFlow().collect {
-                val price = getType()[1].price
+                val price = listPrice[1].price
                 _totalCard.postValue(price * it)
             }
         }
@@ -96,11 +98,12 @@ class ScheduleViewModel : ViewModel() {
 
     fun minCardboardAmount() {
         viewModelScope.launch(Dispatchers.IO) {
+            val listPrice = getType()
             val amount = _amountCardboard.value
             if (_amountCardboard.value != 0){
                 _amountCardboard.postValue(amount!! - 1)
                 amountCardboard.asFlow().collect {
-                    val price = getType()[1].price
+                    val price = listPrice[1].price
                     _totalCard.postValue(price * it)
                 }
             }
@@ -111,10 +114,11 @@ class ScheduleViewModel : ViewModel() {
 
     fun addSteelAmount() {
         viewModelScope.launch(Dispatchers.IO) {
+            val listPrice = getType()
             val amount = _amountSteel.value
             _amountSteel.postValue(amount!! + 1)
             amountSteel.asFlow().collect {
-                val price = getType()[2].price
+                val price = listPrice[2].price
                 _totalSteel.postValue(price * it)
             }
         }
@@ -123,11 +127,12 @@ class ScheduleViewModel : ViewModel() {
 
     fun minSteelAmount() {
         viewModelScope.launch(Dispatchers.IO) {
+            val listPrice = getType()
             val amount = _amountSteel.value
             if (_amountSteel.value != 0) {
                 _amountSteel.postValue(amount!! - 1)
                 amountSteel.asFlow().collect {
-                    val price = getType()[2].price
+                    val price = listPrice[2].price
                     _totalSteel.postValue(price * it)
                 }
             }
@@ -135,11 +140,12 @@ class ScheduleViewModel : ViewModel() {
     }
 
 
-    fun getTotal() = liveData {
+    fun getTotal() = liveData(Dispatchers.IO) {
+        val listPrice = getType()
         val total = MutableLiveData(0)
-        val pricePlastic = getType()[0].price
-        val priceCard = getType()[1].price
-        val priceSteel = getType()[2].price
+        val pricePlastic = listPrice[0].price
+        val priceCard =  listPrice[1].price
+        val priceSteel =  listPrice[2].price
         Log.d("TAG", "$priceCard")
         total.asFlow().collect { t ->
             _amountPlastic.asFlow().combine(_amountCardboard.asFlow()) { aPlastic, aCard ->
