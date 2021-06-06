@@ -1,5 +1,6 @@
 package com.bingo.gobin.ui.pickup
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +20,12 @@ import com.bingo.gobin.util.ID_USER_SEMENTARA
 import com.bingo.gobin.util.INITIAL_ID_TYPE
 import com.bingo.gobin.util.INITIAL_STATUS_ORDER
 import com.bingo.gobin.util.INITIAL_TYPE_INVOICE
+import com.fondesa.kpermissions.PermissionStatus
+import com.fondesa.kpermissions.allGranted
+import com.fondesa.kpermissions.anyPermanentlyDenied
+import com.fondesa.kpermissions.anyShouldShowRationale
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.request.PermissionRequest
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mapbox.android.core.location.LocationEngineCallback
 import com.mapbox.android.core.location.LocationEngineResult
@@ -31,7 +38,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @SuppressLint("SetTextI18n")
-class PickUpFragment : Fragment() {
+class PickUpFragment : Fragment(), PermissionRequest.Listener {
+    private val request by lazy {
+        permissionsBuilder(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ).build()
+    }
     private val viewModel: ScheduleViewModel by activityViewModels()
     private val binding: FragmentPickUpBinding by viewBinding()
 
@@ -48,6 +61,7 @@ class PickUpFragment : Fragment() {
         val bottomNavigationView =
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.GONE
+        request.send()
         setOrderInfo()
         getCurrentDate()
 
@@ -221,6 +235,15 @@ class PickUpFragment : Fragment() {
 
         }
         return sch_status
+    }
+
+    override fun onPermissionsResult(result: List<PermissionStatus>) {
+        val context = requireContext().applicationContext
+        when {
+            result.anyPermanentlyDenied() -> Toast.makeText(context, "Harus menambah permission", Toast.LENGTH_SHORT).show()
+            result.anyShouldShowRationale() -> Toast.makeText(context, "Harus menambah permission", Toast.LENGTH_SHORT).show()
+            result.allGranted() -> return
+        }
     }
 
 

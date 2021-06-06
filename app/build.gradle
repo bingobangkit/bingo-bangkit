@@ -82,6 +82,8 @@ dependencies {
     implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    // The core artifact.
+    implementation 'com.github.fondesa:kpermissions:3.2.1'
 
     implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.0"
     implementation "com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v8:0.7.0"
