@@ -1,5 +1,6 @@
 package com.bingo.gobin.ui.auth
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,12 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bingo.gobin.R
 import com.bingo.gobin.data.model.User
 import com.bingo.gobin.databinding.ActivityRegisterBinding
+import com.fondesa.kpermissions.PermissionStatus
+import com.fondesa.kpermissions.allGranted
+import com.fondesa.kpermissions.anyPermanentlyDenied
+import com.fondesa.kpermissions.anyShouldShowRationale
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.request.PermissionRequest
 import com.mapbox.android.core.location.*
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -32,7 +39,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Suppress("DEPRECATION")
 @ExperimentalCoroutinesApi
 @SuppressLint("MissingPermission")
-class RegisterActivity : AppCompatActivity(), PermissionsListener {
+class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRequest.Listener {
+    private val request by lazy {
+        permissionsBuilder(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ).build()
+    }
     private val binding: ActivityRegisterBinding by viewBinding()
     private val viewModel: AuthViewModel by viewModels()
     private var mapFragment: SupportMapFragment? = null
@@ -59,8 +72,11 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener {
         locationEngine.getLastLocation(callback)
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        request.send()
         Mapbox.getInstance(this, getString(R.string.access_token))
         setContentView(R.layout.activity_register)
         binding.btnRegister.setOnClickListener {
@@ -218,6 +234,15 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener {
 
         override fun onFailure(exception: Exception) {
 
+        }
+    }
+
+    override fun onPermissionsResult(result: List<PermissionStatus>) {
+        val context = this.applicationContext
+        when {
+            result.anyPermanentlyDenied() -> Toast.makeText(context, "Harus menambah permission", Toast.LENGTH_SHORT).show()
+            result.anyShouldShowRationale() -> Toast.makeText(context, "Harus menambah permission", Toast.LENGTH_SHORT).show()
+            result.allGranted() -> return
         }
     }
 }
