@@ -1,4 +1,4 @@
-# bingo-bangkit
+# Bin-Go Team B21-CAP0290 Project
 ## List Repository
 - **Android**
     - [Go-Bin](https://github.com/bingobangkit/bingo-bangkit)
