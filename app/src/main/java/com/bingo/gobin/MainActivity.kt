@@ -1,13 +1,17 @@
 @file:Suppress("DEPRECATION")
 
 package com.bingo.gobin
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.bingo.gobin.databinding.ActivityMainBinding
+import com.bingo.gobin.ui.auth.AuthActivity
 import com.bingo.gobin.ui.camera.ImageDetectionFragment
 import com.bingo.gobin.ui.home.ContentFragment
 import com.bingo.gobin.ui.pickup.ScheduleFragment
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -34,8 +38,15 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.btn_schedule_nav -> {
-                    supportFragmentManager.commit {
-                        replace(R.id.main_fragment_container, ScheduleFragment())
+                    val auth = Firebase.auth.currentUser
+                    if(auth==null){
+                        val intent = Intent(this,AuthActivity::class.java)
+                        startActivity(intent)
+                        binding.bottomNavigationView.selectedItemId =  R.id.btn_home_nav
+                    }else{
+                        supportFragmentManager.commit {
+                            replace(R.id.main_fragment_container, ScheduleFragment())
+                        }
                     }
                     true
                 }
