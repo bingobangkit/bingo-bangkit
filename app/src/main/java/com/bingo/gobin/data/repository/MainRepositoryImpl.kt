@@ -168,7 +168,7 @@ class MainRepositoryImpl {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    user.id = it.result.user?.uid
+                    user.id = it.result?.user?.uid
                     CoroutineScope(Dispatchers.IO).launch {
                         delay(500L)
                         users.document(user.id?:"").set(user).await()
