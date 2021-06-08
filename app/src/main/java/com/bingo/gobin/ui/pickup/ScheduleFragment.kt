@@ -1,6 +1,10 @@
 package com.bingo.gobin.ui.pickup
 
+import android.content.Context
+import android.content.Intent
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,10 +49,16 @@ class ScheduleFragment : Fragment() {
         botnav.visibility = View.VISIBLE
         with(binding) {
             btnSchedule.setOnClickListener {
-                parentFragmentManager.commit {
-                    replace(R.id.main_fragment_container, PickUpFragment())
-                    addToBackStack(null)
+                if(locationEnabled()){
+                    parentFragmentManager.commit {
+                        replace(R.id.main_fragment_container, PickUpFragment())
+                        addToBackStack(null)
+                    }
+                }else{
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent)
                 }
+
             }
         }
 
@@ -56,6 +66,12 @@ class ScheduleFragment : Fragment() {
         getListSchedule()
 
 
+    }
+
+    private fun locationEnabled(): Boolean {
+        val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        return gpsStatus
     }
 
     private fun getUser(){

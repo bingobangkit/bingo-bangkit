@@ -1,11 +1,15 @@
 package com.bingo.gobin.ui.auth
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.getSystemService
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bingo.gobin.R
@@ -16,6 +20,7 @@ import com.fondesa.kpermissions.anyPermanentlyDenied
 import com.fondesa.kpermissions.anyShouldShowRationale
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.request.PermissionRequest
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 class AuthActivity : AppCompatActivity(), PermissionRequest.Listener {
@@ -34,8 +39,14 @@ class AuthActivity : AppCompatActivity(), PermissionRequest.Listener {
         request.send()
         with(binding) {
             btnRegister.setOnClickListener {
-                val intent = Intent(this@AuthActivity, RegisterActivity::class.java)
-                startActivity(intent)
+                if(locationEnabled()){
+                    val intent = Intent(this@AuthActivity, RegisterActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent)
+                }
+
             }
             btnLogin.setOnClickListener {
                 login()
@@ -44,6 +55,11 @@ class AuthActivity : AppCompatActivity(), PermissionRequest.Listener {
         }
     }
 
+    private fun locationEnabled(): Boolean {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        return gpsStatus
+    }
 
     private fun login() {
         with(binding) {
