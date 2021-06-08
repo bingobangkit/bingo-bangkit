@@ -102,6 +102,9 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
             }
         })
 
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
 
         if (savedInstanceState == null) {
             val transaction = supportFragmentManager.beginTransaction()
