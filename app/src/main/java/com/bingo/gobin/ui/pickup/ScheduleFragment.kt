@@ -13,11 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bingo.gobin.R
 import com.bingo.gobin.data.model.Order
+import com.bingo.gobin.data.model.User
 import com.bingo.gobin.databinding.FragmentScheduleBinding
 import com.bingo.gobin.ui.detail.DetailPickupFragment
 import com.bingo.gobin.util.ID_USER_SEMENTARA
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 
 class ScheduleFragment : Fragment() {
@@ -55,7 +60,7 @@ class ScheduleFragment : Fragment() {
 
     private fun getUser(){
         lifecycleScope.launch {
-            viewModel.getUserById(ID_USER_SEMENTARA).observe(viewLifecycleOwner,{user->
+            viewModel.getUserById(Firebase.auth.currentUser?.uid?:ID_USER_SEMENTARA).observe(viewLifecycleOwner,{ user->
                 binding.apply {
                     totalPickup.text = user.jml_pickup
                     walletBalance.text = user.saldo
@@ -68,7 +73,7 @@ class ScheduleFragment : Fragment() {
     private fun getListSchedule() {
         with(binding) {
             lifecycleScope.launchWhenStarted {
-                viewModel.getUserOrder(ID_USER_SEMENTARA)
+                viewModel.getUserOrder(Firebase.auth.currentUser?.uid?:ID_USER_SEMENTARA)
                     .observe(viewLifecycleOwner, {
                         Log.d("TAG", "getListSchedule: $it")
                         if (it.isNotEmpty()) {
@@ -131,6 +136,5 @@ class ScheduleFragment : Fragment() {
             imgNoSchedule.visibility = View.GONE
         }
     }
-
 
 }
