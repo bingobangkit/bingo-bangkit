@@ -3,6 +3,7 @@ package com.bingo.gobin.ui.pickup
 import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bingo.gobin.DateUtil
 import com.bingo.gobin.R
 import com.bingo.gobin.data.model.Order
+import com.bingo.gobin.data.model.User
 import com.bingo.gobin.databinding.FragmentPickUpBinding
 import com.bingo.gobin.util.ID_USER_SEMENTARA
 import com.bingo.gobin.util.INITIAL_ID_TYPE
@@ -27,13 +29,21 @@ import com.fondesa.kpermissions.anyShouldShowRationale
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.request.PermissionRequest
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.mapbox.android.core.location.LocationEngineCallback
 import com.mapbox.android.core.location.LocationEngineResult
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
+import com.squareup.okhttp.Dispatcher
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,11 +57,14 @@ class PickUpFragment : Fragment(), PermissionRequest.Listener {
     }
     private val viewModel: ScheduleViewModel by activityViewModels()
     private val binding: FragmentPickUpBinding by viewBinding()
+    private var user: User? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
         return inflater.inflate(R.layout.fragment_pick_up, container, false)
     }
 
@@ -64,11 +77,22 @@ class PickUpFragment : Fragment(), PermissionRequest.Listener {
         request.send()
         setOrderInfo()
         getCurrentDate()
-
+        initialAddress()
         setAmount()
         setTotal()
         setPrice()
         setSchedule()
+
+
+    }
+
+    private fun initialAddress() {
+        lifecycleScope.launchWhenStarted {
+            user = getUserData()
+            binding.txtAddress.text = withContext(Dispatchers.Main) {
+                user?.address
+            }
+        }
 
     }
 
@@ -204,11 +228,14 @@ class PickUpFragment : Fragment(), PermissionRequest.Listener {
                 val total_price_cardboard = binding.txtTotalCardboard.text.toString()
                 val total_price_steel = binding.txtTotalSteel.text.toString()
                 val id_invoice = DateUtil.generateInvoice(INITIAL_TYPE_INVOICE)
-                val address = this.address.value
-                val latitude = this.latitude.value
-                val longitude = this.longitude.value
+                val address =  user?.address ?: this.address.value
+                val latitude =  user?.latitude ?: this.latitude.value
+                val longitude = user?.longitude ?: this.longitude.value
                 val status = INITIAL_STATUS_ORDER
-
+                if (amount=="0"){
+                    sch_status = false
+                    return@launchWhenStarted
+                }
                 val order = Order(
                     id_invoice = id_invoice,
                     id_type = id_type,
@@ -221,16 +248,14 @@ class PickUpFragment : Fragment(), PermissionRequest.Listener {
                     longitude = longitude,
                     status = status,
                     date = date,
-                    id_user = ID_USER_SEMENTARA,
+                    id_user = user?.id ?: ID_USER_SEMENTARA,
                     total_price = total_price,
                     total_cardboard = total_price_cardboard,
                     total_plastic = total_price_plastic,
                     total_steel = total_price_steel,
 
                     )
-                if (setOrder(order)) {
-                    sch_status = true
-                }
+                if (setOrder(order)) sch_status = true
             }
 
         }
@@ -240,11 +265,29 @@ class PickUpFragment : Fragment(), PermissionRequest.Listener {
     override fun onPermissionsResult(result: List<PermissionStatus>) {
         val context = requireContext().applicationContext
         when {
-            result.anyPermanentlyDenied() -> Toast.makeText(context, "Harus menambah permission", Toast.LENGTH_SHORT).show()
-            result.anyShouldShowRationale() -> Toast.makeText(context, "Harus menambah permission", Toast.LENGTH_SHORT).show()
+            result.anyPermanentlyDenied() -> Toast.makeText(
+                context,
+                "Harus menambah permission",
+                Toast.LENGTH_SHORT
+            ).show()
+            result.anyShouldShowRationale() -> Toast.makeText(
+                context,
+                "Harus menambah permission",
+                Toast.LENGTH_SHORT
+            ).show()
             result.allGranted() -> return
         }
     }
 
+    suspend fun getUserData(): User? {
+        val uid = Firebase.auth.currentUser?.uid
+        if (uid != null) {
+            return Firebase.firestore.collection("users")
+                .whereEqualTo("id", uid)
+                .get().await().toObjects(User::class.java)[0]
+        } else {
+            return null
+        }
+    }
 
 }
