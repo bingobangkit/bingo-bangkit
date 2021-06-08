@@ -26,14 +26,14 @@ class AuthActivity : AppCompatActivity(), PermissionRequest.Listener {
         ).build()}
     private val viewModel: AuthViewModel by viewModels()
     private val binding: ActivityAuthBinding by viewBinding()
-    @ExperimentalCoroutinesApi
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-
+        request.send()
         with(binding) {
             btnRegister.setOnClickListener {
-                request.send()
                 val intent = Intent(this@AuthActivity, RegisterActivity::class.java)
                 startActivity(intent)
             }
@@ -55,6 +55,7 @@ class AuthActivity : AppCompatActivity(), PermissionRequest.Listener {
                 viewModel.login(email, password).observe(this@AuthActivity, {
                     if (it) {
                         Toast.makeText(this@AuthActivity, "Berhasil Login", Toast.LENGTH_SHORT).show()
+
                         finish()
                     } else {
                         Toast.makeText(this@AuthActivity, "Error", Toast.LENGTH_SHORT).show()

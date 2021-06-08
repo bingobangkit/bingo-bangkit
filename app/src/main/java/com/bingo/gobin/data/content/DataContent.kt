@@ -85,6 +85,16 @@ object DataContent {
                 )
 
             ),
+                Content(
+                    name = "NON PLASTIC",
+                    type = "Not Recyclable",
+                    description = "Properties : Diverse in nature with various properties",
+                    commonUses = listOf(
+                        CommonUses(name = "CD/DVD", image = R.drawable.other1),
+                        CommonUses(name = "Plastic Eye glasses", image = R.drawable.other2),
+                    )
+
+                ),
         ))
         return listContent
     }

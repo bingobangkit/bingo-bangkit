@@ -26,7 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoBin">
         <activity android:name=".ui.auth.RegisterActivity" />
-        <activity android:name=".ui.ProfileActivity" />
+        <activity android:name=".ui.settings.SettingActivity" />
         <activity android:name=".ui.auth.AuthActivity" />
         <activity
             android:name="com.canhub.cropper.CropImageActivity"

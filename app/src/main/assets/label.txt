@@ -1,8 +1,8 @@
-PET
-HDPE
-PVC
-LDPE
-PP
-PS
-OTHER
-NO_PLASTIC
+1_polyethylene_PET
+2_high_density_polyethylene_PE-HD
+3_polyvinylchloride_PVC
+4_low_density_polyethylene_PE-LD
+5_polypropylene_PP
+6_polystyrene_PS
+7_other_resins
+8_no_plastic

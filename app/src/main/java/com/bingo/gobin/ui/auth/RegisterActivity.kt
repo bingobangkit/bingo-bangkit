@@ -150,6 +150,7 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
                 .build()
             mapBoxMap.cameraPosition =cameraPosition
             viewModel.last_latlng.postValue(latLng)
+            locationEngine.removeLocationUpdates(callback)
             mapBoxMap.locationComponent.isLocationComponentEnabled = false
         }
     }
