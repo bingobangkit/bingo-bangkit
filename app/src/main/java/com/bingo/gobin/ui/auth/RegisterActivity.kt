@@ -122,7 +122,9 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
                 callback = LocationChangeListeningCallback()
                 enableLocationComponent(style)
             }
+            val latLng = viewModel.last_latlng.value
             val cameraPosition = CameraPosition.Builder()
+                .target(latLng)
                 .zoom(16.0)
                 .build()
             mapBoxMap.cameraPosition =cameraPosition
@@ -146,11 +148,10 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
             mapBoxMap.addMarker(MarkerOptions().position(latLng).title("Your Picked Location"))
             val cameraPosition = CameraPosition.Builder()
                 .target(latLng)
-                .zoom(16.5)
+                .zoom(16.0)
                 .build()
             mapBoxMap.cameraPosition =cameraPosition
             viewModel.last_latlng.postValue(latLng)
-            locationEngine.removeLocationUpdates(callback)
             mapBoxMap.locationComponent.isLocationComponentEnabled = false
         }
     }
