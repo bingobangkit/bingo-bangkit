@@ -21,6 +21,8 @@ import com.mapbox.android.core.location.*
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.annotations.IconFactory
+import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
@@ -54,6 +56,7 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
     private lateinit var symbolManager: SymbolManager
     private lateinit var callback: LocationChangeListeningCallback
     private lateinit var locationEngine: LocationEngine
+
 
     companion object {
         const val REQUEST_CODE = 5678
@@ -119,9 +122,11 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
                 callback = LocationChangeListeningCallback()
                 enableLocationComponent(style)
             }
+            val cameraPosition = CameraPosition.Builder()
+                .zoom(16.0)
+                .build()
+            mapBoxMap.cameraPosition =cameraPosition
         }
-
-
 
 
 
@@ -136,7 +141,16 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
             val carmenFeature = PlacePicker.getPlace(data)
             val latitude = carmenFeature?.center()?.latitude()
             val longitude = carmenFeature?.center()?.longitude()
+            val latLng = LatLng(latitude!!, longitude!!)
             viewModel._latlng.postValue(LatLng(latitude!!, longitude!!))
+            mapBoxMap.addMarker(MarkerOptions().position(latLng).title("Your Picked Location"))
+            val cameraPosition = CameraPosition.Builder()
+                .target(latLng)
+                .zoom(16.5)
+                .build()
+            mapBoxMap.cameraPosition =cameraPosition
+            viewModel.last_latlng.postValue(latLng)
+            mapBoxMap.locationComponent.isLocationComponentEnabled = false
         }
     }
 
@@ -193,6 +207,8 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
             permissionsManager.requestLocationPermissions(this)
         }
     }
+
+
 
     override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
         Toast.makeText(this, "Perlu Izin Lokasi", Toast.LENGTH_LONG).show()
