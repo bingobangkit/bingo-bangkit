@@ -20,7 +20,7 @@
   <img src="https://github.com/bingobangkit/bingo-bangkit/blob/master/Screenshot%20GoBin/settings.jpg" width="200" />
 </p>
 
-
+***[Image Attribution](https://github.com/bingobangkit/bingo-bangkit/blob/master/Screenshot%20GoBin/image_attribution.md)***
 
 ****Minimum System Requirements****
 
