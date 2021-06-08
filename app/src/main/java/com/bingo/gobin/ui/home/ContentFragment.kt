@@ -7,14 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.BounceInterpolator
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bingo.gobin.R
 import com.bingo.gobin.data.content.DataContent
+import com.bingo.gobin.data.model.User
 import com.bingo.gobin.databinding.FragmentContentBinding
-import com.bingo.gobin.ui.ProfileActivity
+import com.bingo.gobin.ui.settings.SettingActivity
 import com.bingo.gobin.ui.auth.AuthActivity
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 
 @Suppress("DEPRECATION")
@@ -36,12 +42,21 @@ class ContentFragment : Fragment() {
         with(binding) {
             binding.imageView.setOnClickListener {
                 val auth = Firebase.auth.currentUser
-                if (auth == null){
-                    val intent = Intent(context,AuthActivity::class.java)
+                if (auth == null) {
+                    val intent = Intent(context, AuthActivity::class.java)
                     startActivity(intent)
-                }else{
-                    val intent = Intent(context,ProfileActivity::class.java)
-                    startActivity(intent)
+                } else {
+                    val intent = Intent(context, SettingActivity::class.java)
+                    lifecycleScope.launch {
+                       val user = Firebase.firestore
+                            .collection("users")
+                            .whereEqualTo("id", Firebase.auth.uid).get()
+                            .await()
+                            .toObjects(User::class.java)[0]
+                        intent.putExtra("name", user.name)
+                        delay(2000L)
+                        startActivity(intent)
+                    }
                 }
 
             }
@@ -90,7 +105,7 @@ class ContentFragment : Fragment() {
                     recycleDesc.text = co.description
                     materialCardView2.setCardBackgroundColor(resources.getColor(R.color.yellow))
                     materialCardView2.scaleY = 1.25f
-                }else{
+                } else {
                     materialCardView2.scaleY = 1f
                 }
             }
