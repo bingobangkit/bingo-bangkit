@@ -13,8 +13,8 @@ import com.bingo.gobin.R
 import com.bingo.gobin.data.content.DataContent
 import com.bingo.gobin.data.model.User
 import com.bingo.gobin.databinding.FragmentContentBinding
-import com.bingo.gobin.ui.settings.SettingActivity
 import com.bingo.gobin.ui.auth.AuthActivity
+import com.bingo.gobin.ui.settings.SettingActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

@@ -1,23 +1,19 @@
 package com.bingo.gobin.data.repository
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bingo.gobin.data.model.Order
 import com.bingo.gobin.data.model.User
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.model.ServerTimestamps
-import com.google.firebase.firestore.model.mutation.ServerTimestampOperation
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.asDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 

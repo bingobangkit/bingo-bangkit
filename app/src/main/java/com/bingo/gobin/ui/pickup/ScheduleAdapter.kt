@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bingo.gobin.data.content.CommonUses
 import com.bingo.gobin.data.model.Order
 import com.bingo.gobin.databinding.RowScheduleBinding
 

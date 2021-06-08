@@ -1,8 +1,5 @@
 package com.bingo.gobin.data.model
 
-import android.os.Parcelable
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.Exclude
 import java.io.Serializable
 
 

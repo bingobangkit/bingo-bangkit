@@ -1,7 +1,6 @@
 package com.bingo.gobin
 
 import android.annotation.SuppressLint
-import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 

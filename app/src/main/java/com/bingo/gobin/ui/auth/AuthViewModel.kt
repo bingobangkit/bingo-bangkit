@@ -3,12 +3,10 @@ package com.bingo.gobin.ui.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import com.bingo.gobin.data.model.User
 import com.bingo.gobin.data.repository.MainRepositoryImpl
 import com.mapbox.mapboxsdk.geometry.LatLng
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.tasks.asTask
 
 @ExperimentalCoroutinesApi
 class AuthViewModel : ViewModel() {
