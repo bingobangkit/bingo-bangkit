@@ -22,6 +22,7 @@ import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.annotations.IconFactory
+import com.mapbox.mapboxsdk.annotations.Marker
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -53,9 +54,9 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
     private var mapFragment: SupportMapFragment? = null
     private lateinit var mapBoxMap: MapboxMap
     private lateinit var permissionsManager: PermissionsManager
-    private lateinit var symbolManager: SymbolManager
     private lateinit var callback: LocationChangeListeningCallback
     private lateinit var locationEngine: LocationEngine
+    private var lastMarker : MarkerOptions? = null
 
 
     companion object {
@@ -145,14 +146,16 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
             val longitude = carmenFeature?.center()?.longitude()
             val latLng = LatLng(latitude!!, longitude!!)
             viewModel._latlng.postValue(LatLng(latitude!!, longitude!!))
+            lastMarker = MarkerOptions().position(latLng).title("Your Picked Location")
             mapBoxMap.addMarker(MarkerOptions().position(latLng).title("Your Picked Location"))
             val cameraPosition = CameraPosition.Builder()
                 .target(latLng)
-                .zoom(16.0)
+                .zoom(17.0)
                 .build()
             mapBoxMap.cameraPosition =cameraPosition
             viewModel.last_latlng.postValue(latLng)
             mapBoxMap.locationComponent.isLocationComponentEnabled = false
+            binding.btnPickLocationRegister.isEnabled = false
         }
     }
 
@@ -253,6 +256,11 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
         override fun onFailure(exception: Exception) {
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapFragment?.onResume()
     }
 
     override fun onPermissionsResult(result: List<PermissionStatus>) {
