@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Go-Bin</string>
-    <string name="mapbox_access_token">pk.eyJ1IjoiZ29iaW5iYW5na2l0IiwiYSI6ImNrcGU2YmdhMDBvNm0yd3JvbXo2ZmM5bWsifQ.kG4TwZkOlIdbPYN3Y5tipA</string>
-    <string name="access_token">pk.eyJ1IjoiZ29iaW5iYW5na2l0IiwiYSI6ImNrcGU2YmdhMDBvNm0yd3JvbXo2ZmM5bWsifQ.kG4TwZkOlIdbPYN3Y5tipA</string>
+    <string name="mapbox_access_token">sk.eyJ1IjoiZ29iaW5iYW5na2l0IiwiYSI6ImNrc2RhYXZkZDBqZ3kyb3Aya3F6Mmx2MHkifQ.q0EqCMC4fS7zarSjOb4y3A</string>
+    <string name="access_token">sk.eyJ1IjoiZ29iaW5iYW5na2l0IiwiYSI6ImNrc2RhYXZkZDBqZ3kyb3Aya3F6Mmx2MHkifQ.q0EqCMC4fS7zarSjOb4y3A</string>
 </resources>

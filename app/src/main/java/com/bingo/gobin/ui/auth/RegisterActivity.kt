@@ -41,12 +41,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @SuppressLint("MissingPermission")
 class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRequest.Listener {
     private val request by lazy {
+
         permissionsBuilder(
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
+            Manifest.permission.ACCESS_COARSE_LOCATION,
         ).build()
     }
-    private val binding: ActivityRegisterBinding by viewBinding()
+    private lateinit var binding: ActivityRegisterBinding
     private val viewModel: AuthViewModel by viewModels()
     private var mapFragment: SupportMapFragment? = null
     private lateinit var mapBoxMap: MapboxMap
@@ -77,9 +78,10 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        request.send()
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         Mapbox.getInstance(this, getString(R.string.access_token))
-        setContentView(R.layout.activity_register)
+        request.send()
         binding.btnRegister.setOnClickListener {
             register()
         }
@@ -109,10 +111,12 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
         if (savedInstanceState == null) {
             val transaction = supportFragmentManager.beginTransaction()
             val options = MapboxMapOptions.createFromAttributes(this, null)
+            Mapbox.getInstance(this, getString(R.string.access_token))
             mapFragment = SupportMapFragment.newInstance(options)
             transaction.add(R.id.map_register, mapFragment!!, "com.mapbox.map")
             transaction.commit()
         } else {
+            Mapbox.getInstance(this, getString(R.string.access_token))
             mapFragment =
                 supportFragmentManager.findFragmentByTag("com.mapbox.map") as SupportMapFragment
         }
@@ -256,11 +260,6 @@ class RegisterActivity : AppCompatActivity(), PermissionsListener,  PermissionRe
         override fun onFailure(exception: Exception) {
 
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapFragment?.onResume()
     }
 
     override fun onPermissionsResult(result: List<PermissionStatus>) {
